@@ -30,20 +30,20 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
           <X size={20} />
         </button>
 
-        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: '#f4ede1', padding: '0.35rem 0.9rem', borderRadius: '9999px', fontSize: '0.8rem', fontWeight: 700, color: '#163627', marginBottom: '0.6rem' }}>
+        <div className="modal-header-block">
+          <div className="modal-badge-pill">
             <Sparkles size={14} color="#c69214" />
-            <span>DIRECT LOCAL PRICING BY Us</span>
+            <span>DIRECT LOCAL PRICING BY US</span>
           </div>
-          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.8rem', color: '#0f251b' }}>
+          <h3 className="modal-title">
             Customize Your Tour Package
           </h3>
-          <p style={{ fontSize: '0.88rem', color: '#58635d', marginTop: '0.2rem' }}>
-            Tell us your travel preferences. We will generate your inquiry directly on WhatsApp toUs (+91 9024772664) with no broker fees.
+          <p className="modal-subtitle">
+            Tell us your travel preferences. We will generate your inquiry directly on WhatsApp to us (+91 9024772664) with no broker fees.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <form onSubmit={handleSubmit} className="modal-form-body">
           <div className="widget-field">
             <label>Choose Tour Destination</label>
             <select value={destination} onChange={(e) => setDestination(e.target.value)}>
@@ -56,7 +56,7 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
             </select>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="modal-grid-two">
             <div className="widget-field">
               <label>Travel Month / Dates</label>
               <select value={month} onChange={(e) => setMonth(e.target.value)}>
@@ -82,7 +82,7 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="modal-grid-two">
             <div className="widget-field">
               <label>Stay Preference</label>
               <select value={hotelTier} onChange={(e) => setHotelTier(e.target.value)}>
@@ -109,10 +109,10 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
             style={{ marginTop: '0.8rem' }}
           >
             <MessageCircle size={20} />
-            <span>Send toUs on WhatsApp (+91 9024772664)</span>
+            <span>Send to Us on WhatsApp (+91 9024772664)</span>
           </button>
 
-          <p style={{ textAlign: 'center', fontSize: '0.78rem', color: '#828e88' }}>
+          <p className="modal-disclaimer">
             Redirects directly to WhatsApp with your pre-filled inquiry. No spam, immediate personal response.
           </p>
         </form>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import {
-  ArrowLeft, MessageCircle, Clock, Calendar, MapPin,
-  Star, Compass, Sparkles, Check, Info, ShieldCheck,
-  ChevronRight, Share2, Heart, Award
+import { 
+  ArrowLeft, MessageCircle, Clock, Calendar, MapPin, 
+  Star, Compass, Sparkles, Check, Info, ShieldCheck, 
+  ChevronRight, Share2, Award
 } from 'lucide-react';
 import { DESTINATIONS, openWhatsAppQuote } from '../data/destinations';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
@@ -41,7 +41,7 @@ export default function DestinationDetail() {
       navigator.share({
         title: `${destination.name} Package - TravelWith Us`,
         url: window.location.href
-      }).catch(() => { });
+      }).catch(() => {});
     } else {
       navigator.clipboard.writeText(window.location.href);
       setCopied(true);
@@ -61,40 +61,28 @@ export default function DestinationDetail() {
           <span>Back to All Destinations</span>
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-          <button
+        <div className="detail-nav-actions">
+          <button 
             onClick={handleShare}
-            style={{
-              background: '#f4ede1',
-              border: 'none',
-              padding: '0.5rem 0.9rem',
-              borderRadius: '9999px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              fontSize: '0.82rem',
-              fontWeight: 600,
-              color: '#163627'
-            }}
+            className="btn-share-tour"
+            aria-label="Share this package"
           >
             <Share2 size={15} />
             <span>{copied ? 'Link Copied!' : 'Share Tour'}</span>
           </button>
 
-          <button
-            className="btn-price-whatsapp"
+          <button 
+            className="btn-price-whatsapp detail-nav-whatsapp"
             onClick={handleWhatsAppClick}
-            style={{ padding: '0.5rem 1.2rem', fontSize: '0.86rem' }}
           >
-            <MessageCircle size={17} />
+            <MessageCircle size={16} />
             <span>Get Price on WhatsApp</span>
           </button>
         </div>
       </nav>
 
       {/* Hero Banner with Heritage Photo */}
-      <section
+      <section 
         className="detail-hero-banner"
         style={{ backgroundImage: `url('${destination.heroImage}')` }}
       >
@@ -109,19 +97,19 @@ export default function DestinationDetail() {
 
           <div className="detail-facts-row">
             <div className="fact-item">
-              <Clock size={16} color="#c69214" />
+              <Clock size={15} color="#c69214" />
               <span><strong>Duration:</strong> {destination.duration}</span>
             </div>
             <div className="fact-item">
-              <Calendar size={16} color="#c69214" />
+              <Calendar size={15} color="#c69214" />
               <span><strong>Best Season:</strong> {destination.bestSeason}</span>
             </div>
             <div className="fact-item">
-              <MapPin size={16} color="#c69214" />
+              <MapPin size={15} color="#c69214" />
               <span><strong>Nearest Transit:</strong> {destination.nearestHub}</span>
             </div>
             <div className="fact-item">
-              <Star size={16} color="#c69214" fill="#c69214" />
+              <Star size={15} color="#c69214" fill="#c69214" />
               <span><strong>Rating:</strong> {destination.rating} ({destination.reviewsCount}+ verified reviews)</span>
             </div>
           </div>
@@ -160,9 +148,9 @@ export default function DestinationDetail() {
                 <div key={idx} className="place-card-detailed">
                   <div className="place-card-img-wrap">
                     <span className="place-card-category">{place.category}</span>
-                    <img
-                      src={place.image}
-                      alt={place.name}
+                    <img 
+                      src={place.image} 
+                      alt={place.name} 
                       className="place-card-img"
                       loading="lazy"
                       onError={(e) => {
@@ -269,37 +257,37 @@ export default function DestinationDetail() {
               <span>What's Included in This Package</span>
             </h2>
 
-            <div style={{ background: '#ffffff', borderRadius: '16px', padding: '2rem', border: '1px solid var(--color-sand-border)', boxShadow: 'var(--shadow-sm)' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.2rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem' }}>
-                  <Check size={20} color="#163627" style={{ flexShrink: 0, marginTop: '2px' }} />
+            <div className="inclusions-card">
+              <div className="inclusions-grid">
+                <div className="inclusion-item">
+                  <Check size={20} color="#163627" className="inclusion-icon" />
                   <div>
-                    <strong style={{ display: 'block', fontSize: '0.95rem' }}>Private Sanitized AC Vehicle</strong>
-                    <span style={{ fontSize: '0.85rem', color: '#58635d' }}>Commercial tourist permit, experienced local chauffeur, fuel, toll taxes & parking included.</span>
+                    <strong>Private Sanitized AC Vehicle</strong>
+                    <span>Commercial tourist permit, experienced local chauffeur, fuel, toll taxes & parking included.</span>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem' }}>
-                  <Check size={20} color="#163627" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <div className="inclusion-item">
+                  <Check size={20} color="#163627" className="inclusion-icon" />
                   <div>
-                    <strong style={{ display: 'block', fontSize: '0.95rem' }}>Heritage Stays with Breakfast</strong>
-                    <span style={{ fontSize: '0.85rem', color: '#58635d' }}>Handpicked boutique havelis, lake view hotels, or luxury desert Swiss tents.</span>
+                    <strong>Heritage Stays with Breakfast</strong>
+                    <span>Handpicked boutique havelis, lake view hotels, or luxury desert Swiss tents.</span>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem' }}>
-                  <Check size={20} color="#163627" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <div className="inclusion-item">
+                  <Check size={20} color="#163627" className="inclusion-icon" />
                   <div>
-                    <strong style={{ display: 'block', fontSize: '0.95rem' }}>24/7 Dedicated Coordinator</strong>
-                    <span style={{ fontSize: '0.85rem', color: '#58635d' }}>Direct WhatsApp and call support byUs for any mid-trip requests or recommendations.</span>
+                    <strong>24/7 Dedicated Coordinator</strong>
+                    <span>Direct WhatsApp and call support by Aspak for any mid-trip requests or recommendations.</span>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem' }}>
-                  <Check size={20} color="#163627" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <div className="inclusion-item">
+                  <Check size={20} color="#163627" className="inclusion-icon" />
                   <div>
-                    <strong style={{ display: 'block', fontSize: '0.95rem' }}>Custom Sightseeing Pace</strong>
-                    <span style={{ fontSize: '0.85rem', color: '#58635d' }}>No rigid tour bus rush. Stop for photography, local tea stalls, and folk arts at your choice.</span>
+                    <strong>Custom Sightseeing Pace</strong>
+                    <span>No rigid tour bus rush. Stop for photography, local tea stalls, and folk arts at your choice.</span>
                   </div>
                 </div>
               </div>
@@ -314,7 +302,7 @@ export default function DestinationDetail() {
               <div className="widget-price-title">Exclusive Package Rate</div>
               <div className="widget-price-badge">Get Best Price</div>
               <p className="widget-price-note">
-                Direct booking via WhatsApp withUs — No middleman commission!
+                Direct booking via WhatsApp with Aspak — No middleman commission!
               </p>
             </div>
 
@@ -364,8 +352,8 @@ export default function DestinationDetail() {
               </div>
 
               {/* CRITICAL USER REQUIREMENT: Price click redirects to WhatsApp */}
-              <button
-                type="button"
+              <button 
+                type="button" 
                 className="btn-widget-whatsapp"
                 onClick={handleWhatsAppClick}
                 style={{ marginTop: '0.6rem' }}
@@ -378,7 +366,7 @@ export default function DestinationDetail() {
             <div className="widget-support-banner">
               <Award size={20} color="#163627" style={{ flexShrink: 0 }} />
               <div>
-                <strong>Direct Contact:Us</strong>
+                <strong>Direct Contact: Aspak</strong>
                 <div>Phone: +91 9024772664</div>
               </div>
             </div>
@@ -387,42 +375,32 @@ export default function DestinationDetail() {
       </div>
 
       {/* Explore More Rajasthan Destinations Section */}
-      <section style={{ maxWidth: '1440px', margin: '3rem auto 5rem', padding: '0 3.5rem' }}>
-        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', color: '#0f251b', marginBottom: '1.8rem' }}>
+      <section className="explore-more-section">
+        <h3 className="explore-more-title">
           Explore Other Rajasthan Tour Packages
         </h3>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
+        <div className="explore-more-grid">
           {otherDestinations.map(other => (
-            <Link
-              key={other.id}
+            <Link 
+              key={other.id} 
               to={`/destination/${other.id}`}
-              style={{
-                background: '#ffffff',
-                borderRadius: '16px',
-                overflow: 'hidden',
-                boxShadow: 'var(--shadow-sm)',
-                border: '1px solid var(--color-sand-border)',
-                transition: 'transform 0.3s ease',
-                display: 'block'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-4px)'}
-              onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+              className="explore-more-card"
             >
-              <div style={{ height: '150px', overflow: 'hidden' }}>
-                <img
-                  src={other.cardImage}
-                  alt={other.name}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              <div className="explore-more-img-wrap">
+                <img 
+                  src={other.cardImage} 
+                  alt={other.name} 
+                  className="explore-more-img"
                   loading="lazy"
                 />
               </div>
-              <div style={{ padding: '1.2rem' }}>
-                <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: '#0f251b' }}>{other.name}</h4>
-                <p style={{ fontSize: '0.84rem', color: '#58635d', marginTop: '0.2rem' }}>{other.subtitle}</p>
-                <div style={{ marginTop: '0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.8rem', color: '#163627', fontWeight: 600 }}>
+              <div className="explore-more-body">
+                <h4 className="explore-more-name">{other.name}</h4>
+                <p className="explore-more-sub">{other.subtitle}</p>
+                <div className="explore-more-footer">
                   <span>{other.duration}</span>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+                  <span className="explore-more-link-text">
                     View Package <ChevronRight size={14} />
                   </span>
                 </div>

@@ -1,0 +1,123 @@
+/* ====================================================================
+   TravelWith Us - Luxury Rajasthan Tour Packages Styling
+   ==================================================================== */
+
+:root {
+  --color-forest: #163627;
+  --color-forest-dark: #0f251b;
+  --color-forest-light: #234d39;
+  --color-forest-hover: #1c4431;
+
+  --color-sand: #fbf8f2;
+  --color-sand-soft: #f4ede1;
+  --color-sand-border: #e6dcce;
+
+  --color-gold: #c69214;
+  --color-gold-hover: #b08110;
+  --color-gold-light: #fef8e7;
+
+  --color-terracotta: #bd5938;
+  --color-terracotta-dark: #a24626;
+
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #128c7e;
+  --color-whatsapp-hover: #20bd5a;
+
+  --color-text-primary: #19201d;
+  --color-text-secondary: #58635d;
+  --color-text-muted: #828e88;
+  --color-text-light: #fbfbfb;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-royal: 'Cinzel', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --shadow-sm: 0 2px 8px rgba(18, 42, 30, 0.06);
+  --shadow-md: 0 8px 24px rgba(18, 42, 30, 0.08);
+  --shadow-lg: 0 16px 40px rgba(18, 42, 30, 0.12);
+  --shadow-xl: 0 24px 60px rgba(18, 42, 30, 0.18);
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--color-sand);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1eae0;
+}
+::-webkit-scrollbar-thumb {
+  background: #234d39;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #163627;
+}
+
+/* Utility Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+  50% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s infinite;
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}

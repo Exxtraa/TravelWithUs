@@ -21,7 +21,7 @@ export default function HeaderHero1({ onExploreClick, onSearchChange }) {
 
       {/* Massive Center Title matching Image 1 */}
       <div className="hero-center-one">
-        <h1 className="hero-main-title">Travel</h1>
+        <h1 className="hero-main-title">Travel Rajasthan</h1>
         <p className="hero-subtitle-one">
           Travel with intention. Discover royal retreats, active desert adventures,
           and boutique heritage stays all in one place.

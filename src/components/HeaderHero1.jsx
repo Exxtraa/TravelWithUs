@@ -37,7 +37,7 @@ export default function HeaderHero1({ onExploreClick, onSearchChange }) {
 
         <div className="bottom-bar-segment" onClick={onExploreClick}>
           <span className="segment-label">Location</span>
-          <span className="segment-value">Rajasthan (Jaipur, Udaipur, Jaisalmer...)</span>
+          <span className="segment-value">Rajasthan (14 Iconic Destinations)</span>
         </div>
 
         <div className="bottom-bar-segment" onClick={onExploreClick}>

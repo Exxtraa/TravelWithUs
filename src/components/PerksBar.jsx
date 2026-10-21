@@ -16,7 +16,7 @@ export default function PerksBar() {
     {
       icon: <Headphones size={24} />,
       title: "24/7 Dedicated Support",
-      desc: "Direct WhatsApp concierge withUs"
+      desc: "Direct support by Aspak Ali & Shazad Ansari"
     },
     {
       icon: <ShieldCheck size={24} />,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, MessageCircle, Sparkles } from 'lucide-react';
-import { DESTINATIONS, openWhatsAppQuote } from '../data/destinations';
+import { X, MessageCircle, Mail, Sparkles } from 'lucide-react';
+import { DESTINATIONS, CONTACTS, openWhatsAppQuote, openEmailQuote } from '../data/destinations';
 
 export default function CustomPlanModal({ isOpen, onClose, initialDestination = 'jaipur' }) {
   const [destination, setDestination] = useState(initialDestination);
@@ -11,10 +11,20 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleWhatsAppSubmit = (recipient = 'aspak') => {
     const destObj = DESTINATIONS.find(d => d.id === destination) || { name: 'Rajasthan Heritage Circuit' };
     openWhatsAppQuote(destObj.name, {
+      travelers,
+      month,
+      hotelTier,
+      vehicle
+    }, recipient);
+    onClose();
+  };
+
+  const handleEmailSubmit = () => {
+    const destObj = DESTINATIONS.find(d => d.id === destination) || { name: 'Rajasthan Heritage Circuit' };
+    openEmailQuote(destObj.name, {
       travelers,
       month,
       hotelTier,
@@ -33,26 +43,26 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
         <div className="modal-header-block">
           <div className="modal-badge-pill">
             <Sparkles size={14} color="#c69214" />
-            <span>DIRECT LOCAL PRICING BY US</span>
+            <span>DIRECT LOCAL PRICING — ROAM RAJASTHAN</span>
           </div>
           <h3 className="modal-title">
             Customize Your Tour Package
           </h3>
           <p className="modal-subtitle">
-            Tell us your travel preferences. We will generate your inquiry directly on WhatsApp to us (+91 9024772664) with no broker fees.
+            Tell us your travel preferences. We generate an instant inquiry directly to <strong>Aspak Ali</strong> (+91 9024772664) & <strong>Shazad Ansari</strong> (+91 9929250220) with no broker fees.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="modal-form-body">
+        <form onSubmit={(e) => { e.preventDefault(); handleWhatsAppSubmit('aspak'); }} className="modal-form-body">
           <div className="widget-field">
-            <label>Choose Tour Destination</label>
+            <label>Choose Tour Destination ({DESTINATIONS.length} Available)</label>
             <select value={destination} onChange={(e) => setDestination(e.target.value)}>
               {DESTINATIONS.map(d => (
                 <option key={d.id} value={d.id}>
                   {d.name} Package ({d.subtitle})
                 </option>
               ))}
-              <option value="complete">Complete Rajasthan Heritage Circuit (7-10 Days)</option>
+              <option value="complete">Complete Grand Rajasthan Heritage Circuit (7-14 Days)</option>
             </select>
           </div>
 
@@ -61,11 +71,11 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
               <label>Travel Month / Dates</label>
               <select value={month} onChange={(e) => setMonth(e.target.value)}>
                 <option value="This Month">This Month (Immediate)</option>
-                <option value="November">November (Pleasant)</option>
-                <option value="December">December (Festive / Desert Camp)</option>
+                <option value="November">November (Peak Season)</option>
+                <option value="December">December (Festive / Desert Nights)</option>
                 <option value="January">January (Winter Bliss)</option>
                 <option value="February">February (Desert Festival)</option>
-                <option value="March">March (Holi in Rajasthan)</option>
+                <option value="March">March (Spring / Holi in Rajasthan)</option>
                 <option value="Flexible">Dates Flexible</option>
               </select>
             </div>
@@ -103,17 +113,55 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="btn-widget-whatsapp"
-            style={{ marginTop: '0.8rem' }}
-          >
-            <MessageCircle size={20} />
-            <span>Send to Us on WhatsApp (+91 9024772664)</span>
-          </button>
+          {/* Action Buttons: Aspak, Shazad, and Email */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.6rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
+              <button
+                type="button"
+                className="btn-widget-whatsapp"
+                onClick={() => handleWhatsAppSubmit('aspak')}
+                style={{ padding: '0.8rem 0.6rem', fontSize: '0.88rem' }}
+              >
+                <MessageCircle size={17} />
+                <span>Send to Aspak Ali</span>
+              </button>
+
+              <button
+                type="button"
+                className="btn-widget-whatsapp"
+                onClick={() => handleWhatsAppSubmit('shazad')}
+                style={{ padding: '0.8rem 0.6rem', fontSize: '0.88rem', background: '#128c7e' }}
+              >
+                <MessageCircle size={17} />
+                <span>Send to Shazad Ansari</span>
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleEmailSubmit}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                background: '#f4ede1',
+                border: '1.5px solid #d4c7b2',
+                color: '#163627',
+                padding: '0.75rem',
+                borderRadius: '9999px',
+                fontWeight: 700,
+                fontSize: '0.9rem',
+                cursor: 'pointer'
+              }}
+            >
+              <Mail size={17} />
+              <span>Send via Email ({CONTACTS.email})</span>
+            </button>
+          </div>
 
           <p className="modal-disclaimer">
-            Redirects directly to WhatsApp with your pre-filled inquiry. No spam, immediate personal response.
+            Redirects directly to WhatsApp or your Gmail app with your pre-filled inquiry. No spam, immediate personal response.
           </p>
         </form>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Heart, MapPin, Star, Clock, ArrowRight, MessageCircle } from 'lucide-react';
+import { Heart, MapPin, Star, ArrowRight, MessageCircle, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { DESTINATIONS, openWhatsAppQuote } from '../data/destinations';
+import { DESTINATIONS, openWhatsAppQuote, openEmailQuote, CONTACTS } from '../data/destinations';
 
 export default function PopularDestinations({ activeFilter = 'all' }) {
   const [wishlist, setWishlist] = useState({});
@@ -24,8 +24,8 @@ export default function PopularDestinations({ activeFilter = 'all' }) {
       <div className="section-header-centered">
         <h3 className="section-title">Popular Destinations</h3>
         <p className="section-subtitle">
-          Handcrafted royal itineraries with private AC chauffeur, verified guides,
-          and boutique heritage havelis. Direct pricing on WhatsApp withUs.
+          Handcrafted royal itineraries with private AC chauffeur, verified guides, 
+          and boutique heritage havelis. Direct pricing on WhatsApp & Email with Aspak Ali & Shazad Ansari.
         </p>
       </div>
 
@@ -39,18 +39,18 @@ export default function PopularDestinations({ activeFilter = 'all' }) {
               <div className="card-image-wrap">
                 {/* Number Badge matching Image 2 */}
                 <span className="card-number-badge">
-                  {dest.number || index + 1}
+                  {dest.number || (index + 1 < 10 ? `0${index + 1}` : index + 1)}
                 </span>
 
                 {/* Wishlist Heart Button */}
-                <button
+                <button 
                   className={`card-wishlist-btn ${isFavorited ? 'active' : ''}`}
                   onClick={(e) => toggleWishlist(dest.id, e)}
                   aria-label="Add to favorites"
                 >
-                  <Heart
-                    size={18}
-                    fill={isFavorited ? '#e53e3e' : 'none'}
+                  <Heart 
+                    size={18} 
+                    fill={isFavorited ? '#e53e3e' : 'none'} 
                     color={isFavorited ? '#e53e3e' : 'currentColor'}
                   />
                 </button>
@@ -61,8 +61,8 @@ export default function PopularDestinations({ activeFilter = 'all' }) {
                   <span>{dest.locationTag}</span>
                 </span>
 
-                <img
-                  src={dest.cardImage}
+                <img 
+                  src={dest.cardImage} 
                   alt={`${dest.name} Rajasthan`}
                   className="card-image"
                   loading="lazy"
@@ -90,29 +90,73 @@ export default function PopularDestinations({ activeFilter = 'all' }) {
                   {dest.famousPlaces.slice(0, 3).map((place, i) => (
                     <li key={i}>{place.name.split('(')[0].trim()}</li>
                   ))}
-                  <li>+{dest.famousPlaces.length - 3} more spots</li>
+                  {dest.famousPlaces.length > 3 && (
+                    <li>+{dest.famousPlaces.length - 3} more spots</li>
+                  )}
                 </ul>
 
                 {/* Action Buttons */}
                 <div className="card-actions">
-                  {/* CRITICAL USER REQUIREMENT: Price button redirects to WhatsApp with customized autofill message */}
-                  <button
-                    className="btn-price-whatsapp"
-                    onClick={() => openWhatsAppQuote(dest.name)}
-                    title={`Enquire price for ${dest.name} on WhatsApp (+91 9024772664)`}
-                  >
-                    <MessageCircle size={18} />
-                    <span>Get Best Price on WhatsApp</span>
-                  </button>
+                  {/* WhatsApp Action */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem' }}>
+                    <button 
+                      className="btn-price-whatsapp"
+                      onClick={() => openWhatsAppQuote(dest.name, {}, 'aspak')}
+                      title={`Enquire on WhatsApp with Aspak Ali (${CONTACTS.aspak.phone})`}
+                      style={{ fontSize: '0.84rem', padding: '0.65rem 0.5rem' }}
+                    >
+                      <MessageCircle size={15} />
+                      <span>WhatsApp Aspak</span>
+                    </button>
 
-                  {/* Detail Page Link */}
-                  <Link
-                    to={`/destination/${dest.id}`}
-                    className="btn-view-details"
-                  >
-                    <span>View Places & Itinerary</span>
-                    <ArrowRight size={16} />
-                  </Link>
+                    <button 
+                      className="btn-price-whatsapp"
+                      onClick={() => openWhatsAppQuote(dest.name, {}, 'shazad')}
+                      title={`Enquire on WhatsApp with Shazad Ansari (${CONTACTS.shazad.phone})`}
+                      style={{ fontSize: '0.84rem', padding: '0.65rem 0.5rem', background: '#128c7e' }}
+                    >
+                      <MessageCircle size={15} />
+                      <span>WhatsApp Shazad</span>
+                    </button>
+                  </div>
+
+                  {/* Email & Detail Links */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '0.4rem' }}>
+                    <button 
+                      onClick={() => openEmailQuote(dest.name)}
+                      title={`Send email enquiry to ${CONTACTS.email}`}
+                      style={{
+                        background: '#ffffff',
+                        border: '1px solid var(--color-sand-border)',
+                        color: 'var(--color-forest)',
+                        borderRadius: 'var(--radius-full)',
+                        padding: '0.6rem 0.85rem',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.35rem',
+                        fontSize: '0.82rem',
+                        fontWeight: 600,
+                        transition: 'var(--transition-fast)'
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = '#f4ede1'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = '#ffffff'; }}
+                    >
+                      <Mail size={15} />
+                      <span>Email</span>
+                    </button>
+
+                    {/* Detail Page Link */}
+                    <Link 
+                      to={`/destination/${dest.id}`} 
+                      className="btn-view-details"
+                      style={{ flexGrow: 1 }}
+                    >
+                      <span>Places & Itinerary</span>
+                      <ArrowRight size={15} />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

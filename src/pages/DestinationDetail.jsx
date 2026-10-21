@@ -3,9 +3,9 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
   ArrowLeft, MessageCircle, Clock, Calendar, MapPin, 
   Star, Compass, Sparkles, Check, Info, ShieldCheck, 
-  ChevronRight, Share2, Award
+  ChevronRight, Share2, Award, Mail, Phone
 } from 'lucide-react';
-import { DESTINATIONS, openWhatsAppQuote } from '../data/destinations';
+import { DESTINATIONS, CONTACTS, openWhatsAppQuote, openEmailQuote } from '../data/destinations';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import NewsletterFooter from '../components/NewsletterFooter';
 
@@ -25,10 +25,20 @@ export default function DestinationDetail() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [id]);
+    document.title = `${destination.name} Tour Package — Roam Rajasthan`;
+  }, [id, destination.name]);
 
-  const handleWhatsAppClick = () => {
+  const handleWhatsAppClick = (recipient = 'aspak') => {
     openWhatsAppQuote(destination.name, {
+      month: selectedMonth,
+      travelers,
+      hotelTier,
+      vehicle
+    }, recipient);
+  };
+
+  const handleEmailClick = () => {
+    openEmailQuote(destination.name, {
       month: selectedMonth,
       travelers,
       hotelTier,
@@ -39,7 +49,7 @@ export default function DestinationDetail() {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: `${destination.name} Package - TravelWith Us`,
+        title: `${destination.name} Package - Roam Rajasthan`,
         url: window.location.href
       }).catch(() => {});
     } else {
@@ -68,15 +78,36 @@ export default function DestinationDetail() {
             aria-label="Share this package"
           >
             <Share2 size={15} />
-            <span>{copied ? 'Link Copied!' : 'Share Tour'}</span>
+            <span>{copied ? 'Link Copied!' : 'Share'}</span>
           </button>
 
           <button 
             className="btn-price-whatsapp detail-nav-whatsapp"
-            onClick={handleWhatsAppClick}
+            onClick={() => handleWhatsAppClick('aspak')}
+            title="Chat with Aspak Ali on WhatsApp"
           >
             <MessageCircle size={16} />
-            <span>Get Price on WhatsApp</span>
+            <span>WhatsApp Aspak</span>
+          </button>
+
+          <button 
+            className="btn-price-whatsapp detail-nav-whatsapp"
+            onClick={() => handleWhatsAppClick('shazad')}
+            style={{ background: '#128c7e' }}
+            title="Chat with Shazad Ansari on WhatsApp"
+          >
+            <MessageCircle size={16} />
+            <span>WhatsApp Shazad</span>
+          </button>
+
+          <button 
+            onClick={handleEmailClick}
+            className="btn-share-tour"
+            title={`Send Email to ${CONTACTS.email}`}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: '#ffffff', border: '1px solid #163627', color: '#163627', fontWeight: 700 }}
+          >
+            <Mail size={15} />
+            <span>Email</span>
           </button>
         </div>
       </nav>
@@ -191,7 +222,7 @@ export default function DestinationDetail() {
                     {place.travelTip && (
                       <div className="place-tip-box">
                         <Info size={16} style={{ flexShrink: 0, marginTop: '2px' }} />
-                        <span><strong>Aspak's Insider Tip:</strong> {place.travelTip}</span>
+                        <span><strong>Travel Tip:</strong> {place.travelTip}</span>
                       </div>
                     )}
                   </div>
@@ -271,15 +302,15 @@ export default function DestinationDetail() {
                   <Check size={20} color="#163627" className="inclusion-icon" />
                   <div>
                     <strong>Heritage Stays with Breakfast</strong>
-                    <span>Handpicked boutique havelis, lake view hotels, or luxury desert Swiss tents.</span>
+                    <span>Handpicked boutique havelis, lake view hotels, or luxury desert/jungle Swiss tents.</span>
                   </div>
                 </div>
 
                 <div className="inclusion-item">
                   <Check size={20} color="#163627" className="inclusion-icon" />
                   <div>
-                    <strong>24/7 Dedicated Coordinator</strong>
-                    <span>Direct WhatsApp and call support by Aspak for any mid-trip requests or recommendations.</span>
+                    <strong>24/7 Dedicated Coordinators</strong>
+                    <span>Direct WhatsApp and call support by Aspak Ali & Shazad Ansari for any mid-trip requests.</span>
                   </div>
                 </div>
 
@@ -287,7 +318,7 @@ export default function DestinationDetail() {
                   <Check size={20} color="#163627" className="inclusion-icon" />
                   <div>
                     <strong>Custom Sightseeing Pace</strong>
-                    <span>No rigid tour bus rush. Stop for photography, local tea stalls, and folk arts at your choice.</span>
+                    <span>No rigid tour bus rush. Stop for wildlife photography, local tea stalls, and folk arts at your choice.</span>
                   </div>
                 </div>
               </div>
@@ -295,18 +326,18 @@ export default function DestinationDetail() {
           </section>
         </div>
 
-        {/* Right Sticky Sidebar: WhatsApp Price Widget */}
+        {/* Right Sticky Sidebar: WhatsApp & Email Price Widget */}
         <div className="detail-sticky-sidebar">
           <div className="booking-card-widget">
             <div className="widget-price-header">
               <div className="widget-price-title">Exclusive Package Rate</div>
               <div className="widget-price-badge">Get Best Price</div>
               <p className="widget-price-note">
-                Direct booking via WhatsApp with Aspak — No middleman commission!
+                Direct booking with Aspak Ali & Shazad Ansari — No middleman commission!
               </p>
             </div>
 
-            <form onSubmit={(e) => { e.preventDefault(); handleWhatsAppClick(); }} className="widget-form">
+            <form onSubmit={(e) => { e.preventDefault(); handleWhatsAppClick('aspak'); }} className="widget-form">
               <div className="widget-field">
                 <label>Preferred Travel Month</label>
                 <select value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)}>
@@ -351,23 +382,61 @@ export default function DestinationDetail() {
                 </select>
               </div>
 
-              {/* CRITICAL USER REQUIREMENT: Price click redirects to WhatsApp */}
-              <button 
-                type="button" 
-                className="btn-widget-whatsapp"
-                onClick={handleWhatsAppClick}
-                style={{ marginTop: '0.6rem' }}
-              >
-                <MessageCircle size={20} />
-                <span>Enquire Price on WhatsApp</span>
-              </button>
+              {/* CRITICAL USER REQUIREMENT: Price actions */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.6rem' }}>
+                <button 
+                  type="button" 
+                  className="btn-widget-whatsapp"
+                  onClick={() => handleWhatsAppClick('aspak')}
+                >
+                  <MessageCircle size={18} />
+                  <span>Enquire WhatsApp (Aspak Ali)</span>
+                </button>
+
+                <button 
+                  type="button" 
+                  className="btn-widget-whatsapp"
+                  onClick={() => handleWhatsAppClick('shazad')}
+                  style={{ background: '#128c7e' }}
+                >
+                  <MessageCircle size={18} />
+                  <span>Enquire WhatsApp (Shazad Ansari)</span>
+                </button>
+
+                <button 
+                  type="button"
+                  onClick={handleEmailClick}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    background: '#f4ede1',
+                    border: '1.5px solid #d4c7b2',
+                    color: '#163627',
+                    padding: '0.75rem',
+                    borderRadius: '9999px',
+                    fontWeight: 700,
+                    fontSize: '0.9rem',
+                    cursor: 'pointer',
+                    width: '100%'
+                  }}
+                >
+                  <Mail size={17} />
+                  <span>Enquire via Email ({CONTACTS.email})</span>
+                </button>
+              </div>
             </form>
 
-            <div className="widget-support-banner">
-              <Award size={20} color="#163627" style={{ flexShrink: 0 }} />
-              <div>
-                <strong>Direct Contact: Aspak</strong>
-                <div>Phone: +91 9024772664</div>
+            <div className="widget-support-banner" style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', alignItems: 'flex-start' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: '#163627' }}>
+                <Award size={18} />
+                <span>Roam Rajasthan Direct Support</span>
+              </div>
+              <div style={{ fontSize: '0.82rem', color: '#58635d' }}>
+                <div>👤 <strong>Aspak Ali:</strong> {CONTACTS.aspak.phone}</div>
+                <div>👤 <strong>Shazad Ansari:</strong> {CONTACTS.shazad.phone}</div>
+                <div>✉️ <strong>Email:</strong> {CONTACTS.email}</div>
               </div>
             </div>
           </div>
@@ -377,7 +446,7 @@ export default function DestinationDetail() {
       {/* Explore More Rajasthan Destinations Section */}
       <section className="explore-more-section">
         <h3 className="explore-more-title">
-          Explore Other Rajasthan Tour Packages
+          Explore More Rajasthan Tour Packages ({otherDestinations.length} Available)
         </h3>
 
         <div className="explore-more-grid">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { MapPin, Users, Search, Menu, X, ArrowRight, MessageCircle } from 'lucide-react';
+import { MapPin, Users, Search, Menu, X, ArrowRight, MessageCircle, Mail, Phone } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { DESTINATIONS } from '../data/destinations';
+import { DESTINATIONS, CONTACTS, openEmailQuote } from '../data/destinations';
 
 export default function SecondaryNav({ onOpenPlanModal, onSearchClick }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -22,22 +22,22 @@ export default function SecondaryNav({ onOpenPlanModal, onSearchClick }) {
     }
   };
 
-  const handleWhatsAppDirect = () => {
+  const handleWhatsAppDirect = (number = CONTACTS.aspak.cleanPhone) => {
     setMobileMenuOpen(false);
-    const text = encodeURIComponent("Hi Aspak, I would like to plan a customized Rajasthan tour with TravelWith Us. Can you please share details?");
-    window.open(`https://wa.me/919024772664?text=${text}`, '_blank');
+    const text = encodeURIComponent("Hi Aspak & Shazad, I would like to plan a customized Rajasthan tour with Roam Rajasthan. Can you please share details?");
+    window.open(`https://wa.me/${number}?text=${text}`, '_blank');
   };
 
   return (
     <>
       <nav className="secondary-nav-sticky">
-        {/* Brand matching Image 2 */}
+        {/* Brand matching Roam Rajasthan */}
         <Link to="/" className="brand-logo-two" onClick={() => setMobileMenuOpen(false)}>
           <MapPin size={22} />
-          <span>TravelWith Us</span>
+          <span>Roam Rajasthan</span>
         </Link>
 
-        {/* Desktop Nav links matching Image 2 */}
+        {/* Desktop Nav links */}
         <ul className="nav-links-two">
           <li>
             <button onClick={() => handleNavClick('popular-destinations')}>
@@ -47,6 +47,11 @@ export default function SecondaryNav({ onOpenPlanModal, onSearchClick }) {
           <li>
             <button onClick={() => handleNavClick('plan-trip')}>
               Experiences
+            </button>
+          </li>
+          <li>
+            <button onClick={() => handleNavClick('travel-blog')}>
+              Travel Blog
             </button>
           </li>
           <li>
@@ -108,7 +113,7 @@ export default function SecondaryNav({ onOpenPlanModal, onSearchClick }) {
             <div className="mobile-drawer-header">
               <div className="brand-logo-two">
                 <MapPin size={20} />
-                <span>TravelWith Us</span>
+                <span>Roam Rajasthan</span>
               </div>
               <button 
                 className="mobile-drawer-close"
@@ -121,19 +126,19 @@ export default function SecondaryNav({ onOpenPlanModal, onSearchClick }) {
 
             <div className="mobile-drawer-links">
               <button className="mobile-drawer-link" onClick={() => handleNavClick('popular-destinations')}>
-                <span>Destinations & Packages</span>
+                <span>All 14 Destinations & Packages</span>
                 <ArrowRight size={16} />
               </button>
               <button className="mobile-drawer-link" onClick={() => handleNavClick('plan-trip')}>
-                <span>Tailored Experiences</span>
+                <span>Tailored Royal Experiences</span>
                 <ArrowRight size={16} />
               </button>
               <button className="mobile-drawer-link" onClick={() => handleNavClick('travel-blog')}>
-                <span>Travel Guides & Blog</span>
+                <span>Heritage Guides & Blog</span>
                 <ArrowRight size={16} />
               </button>
               <button className="mobile-drawer-link" onClick={() => handleNavClick('about-us')}>
-                <span>About TravelWith Us</span>
+                <span>About Roam Rajasthan</span>
                 <ArrowRight size={16} />
               </button>
               <button className="mobile-drawer-link" onClick={() => handleNavClick('contact-section')}>
@@ -142,7 +147,7 @@ export default function SecondaryNav({ onOpenPlanModal, onSearchClick }) {
               </button>
             </div>
 
-            {/* Quick Destination Shortcuts */}
+            {/* Quick Destination Shortcuts (All 14) */}
             <div className="mobile-dest-shortcuts">
               <span className="shortcuts-title">Quick Destinations:</span>
               <div className="shortcuts-chips">
@@ -159,13 +164,52 @@ export default function SecondaryNav({ onOpenPlanModal, onSearchClick }) {
               </div>
             </div>
 
-            {/* Mobile Drawer WhatsApp CTA */}
+            {/* Mobile Drawer WhatsApp & Email CTAs */}
             <div className="mobile-drawer-cta">
-              <button className="btn-price-whatsapp" onClick={handleWhatsAppDirect} style={{ width: '100%' }}>
-                <MessageCircle size={18} />
-                <span>Chat with Us on WhatsApp</span>
-              </button>
-              <p className="mobile-phone-text">Phone: +91 9024772664 (Aspak)</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                <button 
+                  className="btn-price-whatsapp" 
+                  onClick={() => handleWhatsAppDirect(CONTACTS.aspak.cleanPhone)} 
+                  style={{ width: '100%' }}
+                >
+                  <MessageCircle size={18} />
+                  <span>WhatsApp: Aspak Ali</span>
+                </button>
+                <button 
+                  className="btn-price-whatsapp" 
+                  onClick={() => handleWhatsAppDirect(CONTACTS.shazad.cleanPhone)} 
+                  style={{ width: '100%', background: '#128c7e' }}
+                >
+                  <MessageCircle size={18} />
+                  <span>WhatsApp: Shazad Ansari</span>
+                </button>
+                <button 
+                  className="btn-email-action"
+                  onClick={() => { setMobileMenuOpen(false); openEmailQuote('Rajasthan Heritage Circuit'); }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    background: '#ffffff',
+                    border: '1.5px solid #163627',
+                    color: '#163627',
+                    padding: '0.65rem',
+                    borderRadius: '9999px',
+                    fontWeight: 700,
+                    fontSize: '0.86rem',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Mail size={16} />
+                  <span>Email: {CONTACTS.email}</span>
+                </button>
+              </div>
+
+              <div style={{ marginTop: '0.8rem', textAlign: 'center', fontSize: '0.8rem', color: '#58635d' }}>
+                <div>📞 Aspak Ali: {CONTACTS.aspak.phone}</div>
+                <div>📞 Shazad Ansari: {CONTACTS.shazad.phone}</div>
+              </div>
             </div>
           </div>
         </div>

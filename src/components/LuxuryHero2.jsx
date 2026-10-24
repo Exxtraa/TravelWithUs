@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
-import { Search, Calendar, Users, MapPin } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { DESTINATIONS } from '../data/destinations';
 
-export default function LuxuryHero2({ onFilterChange, onOpenPlanModal }) {
-  const [selectedDestination, setSelectedDestination] = useState('all');
-  const [checkIn, setCheckIn] = useState('2026-11-10');
-  const [checkOut, setCheckOut] = useState('2026-11-15');
-  const [guests, setGuests] = useState('2 Adults');
+export default function LuxuryHero2({ onFilterChange }) {
+  const [selectedDestination, setSelectedDestination] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
-  const handleSearch = (e) => {
-    e?.preventDefault();
-    if (onFilterChange) {
-      onFilterChange(selectedDestination);
-    }
-    const target = document.getElementById('popular-destinations');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handlePlanSubmit = (e) => {
+    e.preventDefault();
+
+    const destObj = DESTINATIONS.find(d => d.id === selectedDestination);
+    const destName = destObj ? destObj.name : (selectedDestination || 'Complete Rajasthan Tour');
+
+    let message = `Hi Roam Rajasthan, I would like to plan a Rajasthan tour package:\n• Destination: ${destName}\n• Start Date: ${startDate || 'Flexible / To be decided'}\n• End Date: ${endDate || 'Flexible / To be decided'}\n\nPlease share the customized itinerary details and direct pricing quote.`;
+
+    const encoded = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/919024772664?text=${encoded}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -34,78 +35,56 @@ export default function LuxuryHero2({ onFilterChange, onOpenPlanModal }) {
           Discover curated royal escapes, golden desert dunes, and unforgettable 
           journeys across the historic heart of Rajasthan.
         </p>
-
-        <div className="hero-cta-buttons">
-          <button 
-            className="btn-pill-dark"
-            onClick={handleSearch}
-          >
-            Explore Destinations
-          </button>
-          <button 
-            className="btn-pill-light"
-            onClick={onOpenPlanModal}
-          >
-            Book Your Stay
-          </button>
-        </div>
       </div>
 
-      {/* Floating Search Bar matching Image 2 */}
-      <form onSubmit={handleSearch} className="floating-search-bar">
+      {/* Floating Plan Form with proper placeholders, destination, start date, end date, and direct WhatsApp redirect to +91 9024772664 */}
+      <form onSubmit={handlePlanSubmit} className="floating-search-bar floating-plan-bar">
         <div className="search-field-item">
           <label>Destination</label>
           <select 
             value={selectedDestination} 
             onChange={(e) => {
               setSelectedDestination(e.target.value);
-              if (onFilterChange) onFilterChange(e.target.value);
+              if (onFilterChange && e.target.value) onFilterChange(e.target.value);
             }}
+            required
+            aria-label="Select Destination"
           >
-            <option value="all">All Rajasthan Packages</option>
+            <option value="" disabled>Select Destination</option>
+            <option value="all">All Rajasthan Heritage Packages</option>
             {DESTINATIONS.map((d) => (
               <option key={d.id} value={d.id}>
-                {d.name}, Rajasthan
+                {d.name} ({d.subtitle})
               </option>
             ))}
           </select>
         </div>
 
         <div className="search-field-item">
-          <label>Check In</label>
+          <label>Start Date</label>
           <input 
             type="date" 
-            value={checkIn}
-            onChange={(e) => setCheckIn(e.target.value)}
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            placeholder="Select Start Date"
+            aria-label="Trip Start Date"
           />
         </div>
 
         <div className="search-field-item">
-          <label>Check Out</label>
+          <label>End Date</label>
           <input 
             type="date" 
-            value={checkOut}
-            onChange={(e) => setCheckOut(e.target.value)}
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            placeholder="Select End Date"
+            aria-label="Trip End Date"
           />
         </div>
 
-        <div className="search-field-item">
-          <label>Guests</label>
-          <select 
-            value={guests} 
-            onChange={(e) => setGuests(e.target.value)}
-          >
-            <option value="1 Adult">1 Adult</option>
-            <option value="2 Adults">2 Adults</option>
-            <option value="2 Adults, 1 Child">2 Adults, 1 Child</option>
-            <option value="4 Adults (Family)">4 Adults (Family)</option>
-            <option value="Group 6+">Group 6+</option>
-          </select>
-        </div>
-
-        <button type="submit" className="btn-search-green">
-          <span>SEARCH</span>
-          <Search size={16} />
+        <button type="submit" className="btn-search-green btn-plan-direct" aria-label="Plan on WhatsApp">
+          <span>Plan</span>
+          <ArrowRight size={17} />
         </button>
       </form>
     </div>

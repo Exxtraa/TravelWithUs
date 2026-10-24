@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
-import { Compass, Search, ArrowRight, MapPin, Calendar, Wallet } from 'lucide-react';
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
+import CamelLogo from './CamelLogo';
 
-export default function HeaderHero1({ onExploreClick, onSearchChange }) {
-  const [searchInput, setSearchInput] = useState('');
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    if (onSearchChange) onSearchChange(searchInput);
-    onExploreClick();
-  };
-
+export default function HeaderHero1({ onExploreClick }) {
   return (
     <section
       className="hero-screen-one"
@@ -17,8 +10,6 @@ export default function HeaderHero1({ onExploreClick, onSearchChange }) {
         backgroundImage: `url('https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Jaipur_03-2016_04_Amber_Fort.jpg/1280px-Jaipur_03-2016_04_Amber_Fort.jpg')`
       }}
     >
-
-
       {/* Massive Center Title matching Image 1 */}
       <div className="hero-center-one">
         <h1 className="hero-main-title">Travel Rajasthan</h1>
@@ -37,7 +28,7 @@ export default function HeaderHero1({ onExploreClick, onSearchChange }) {
 
         <div className="bottom-bar-segment" onClick={onExploreClick}>
           <span className="segment-label">Location</span>
-          <span className="segment-value">Rajasthan (14 Iconic Destinations)</span>
+          <span className="segment-value">Rajasthan (16 Iconic Destinations)</span>
         </div>
 
         <div className="bottom-bar-segment" onClick={onExploreClick}>

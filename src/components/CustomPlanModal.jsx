@@ -11,14 +11,14 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
 
   if (!isOpen) return null;
 
-  const handleWhatsAppSubmit = (recipient = 'aspak') => {
+  const handleWhatsAppSubmit = () => {
     const destObj = DESTINATIONS.find(d => d.id === destination) || { name: 'Rajasthan Heritage Circuit' };
     openWhatsAppQuote(destObj.name, {
       travelers,
       month,
       hotelTier,
       vehicle
-    }, recipient);
+    }, 'primary');
     onClose();
   };
 
@@ -49,11 +49,11 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
             Customize Your Tour Package
           </h3>
           <p className="modal-subtitle">
-            Tell us your travel preferences. We generate an instant inquiry directly to <strong>Aspak Ali</strong> (+91 9024772664) & <strong>Shazad Ansari</strong> (+91 9929250220) with no broker fees.
+            Tell us your travel preferences. We generate an instant inquiry directly to the <strong>Roam Rajasthan Team</strong> (+91 9024772664) with zero broker margins.
           </p>
         </div>
 
-        <form onSubmit={(e) => { e.preventDefault(); handleWhatsAppSubmit('aspak'); }} className="modal-form-body">
+        <form onSubmit={(e) => { e.preventDefault(); handleWhatsAppSubmit(); }} className="modal-form-body">
           <div className="widget-field">
             <label>Choose Tour Destination ({DESTINATIONS.length} Available)</label>
             <select value={destination} onChange={(e) => setDestination(e.target.value)}>
@@ -113,29 +113,17 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
             </div>
           </div>
 
-          {/* Action Buttons: Aspak, Shazad, and Email */}
+          {/* Action Buttons: WhatsApp to +91 9024772664 & Email */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.6rem' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
-              <button
-                type="button"
-                className="btn-widget-whatsapp"
-                onClick={() => handleWhatsAppSubmit('aspak')}
-                style={{ padding: '0.8rem 0.6rem', fontSize: '0.88rem' }}
-              >
-                <MessageCircle size={17} />
-                <span>Send to Aspak Ali</span>
-              </button>
-
-              <button
-                type="button"
-                className="btn-widget-whatsapp"
-                onClick={() => handleWhatsAppSubmit('shazad')}
-                style={{ padding: '0.8rem 0.6rem', fontSize: '0.88rem', background: '#128c7e' }}
-              >
-                <MessageCircle size={17} />
-                <span>Send to Shazad Ansari</span>
-              </button>
-            </div>
+            <button
+              type="button"
+              className="btn-widget-whatsapp"
+              onClick={handleWhatsAppSubmit}
+              style={{ padding: '0.85rem 0.9rem', fontSize: '0.92rem', width: '100%' }}
+            >
+              <MessageCircle size={18} />
+              <span>Send via WhatsApp (+91 9024772664)</span>
+            </button>
 
             <button
               type="button"
@@ -161,7 +149,7 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
           </div>
 
           <p className="modal-disclaimer">
-            Redirects directly to WhatsApp or your Gmail app with your pre-filled inquiry. No spam, immediate personal response.
+            Redirects directly to WhatsApp (+91 9024772664) or your Email app with your pre-filled inquiry. No spam, immediate personal response.
           </p>
         </form>
       </div>

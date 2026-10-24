@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { MessageCircle, Mail, Phone, X, ChevronUp } from 'lucide-react';
+import { MessageCircle, Mail, X, ChevronUp } from 'lucide-react';
 import { CONTACTS, openEmailQuote } from '../data/destinations';
 
 export default function FloatingWhatsApp() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleWhatsApp = (number, name) => {
-    const text = encodeURIComponent(`Hi ${name}, I am interested in planning a Rajasthan tour package with Roam Rajasthan. Could you please share the details and pricing options?`);
+  const handleWhatsApp = (number) => {
+    const text = encodeURIComponent(`Hi, I am interested in planning a Rajasthan tour package with Roam Rajasthan. Could you please share the details and pricing options?`);
     window.open(`https://wa.me/${number}?text=${text}`, "_blank");
   };
 
   return (
-    <div style={{ position: 'fixed', bottom: '1.8rem', right: '1.8rem', zIndex: 1000 }}>
-      {/* Expanded Quick Contact Popover */}
+    <div className="floating-contact-widget" style={{ position: 'fixed', bottom: '1.8rem', right: '1.8rem', zIndex: 1000 }}>
+      {/* Expanded Quick Contact Popover - only showing ONE number (+91 9024772664) and email */}
       {menuOpen && (
         <div 
           style={{
@@ -25,7 +25,7 @@ export default function FloatingWhatsApp() {
             width: '290px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.6rem',
+            gap: '0.65rem',
             animation: 'fadeIn 0.2s ease'
           }}
         >
@@ -43,12 +43,12 @@ export default function FloatingWhatsApp() {
           </div>
 
           <p style={{ fontSize: '0.78rem', color: '#666', lineHeight: 1.4 }}>
-            Direct local pricing without middlemen. Choose your preferred coordinator:
+            Direct local pricing without middlemen. Connect directly with our 24/7 tour coordinator:
           </p>
 
-          {/* Contact 1: Aspak Ali */}
+          {/* Single Contact: Tour Coordinator +91 9024772664 */}
           <button
-            onClick={() => handleWhatsApp(CONTACTS.aspak.cleanPhone, "Aspak")}
+            onClick={() => handleWhatsApp(CONTACTS.primary.cleanPhone)}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -56,47 +56,22 @@ export default function FloatingWhatsApp() {
               background: '#25d366',
               color: '#ffffff',
               border: 'none',
-              padding: '0.6rem 0.9rem',
+              padding: '0.65rem 0.95rem',
               borderRadius: '9999px',
               fontWeight: 700,
-              fontSize: '0.85rem',
+              fontSize: '0.86rem',
               cursor: 'pointer',
               transition: 'transform 0.15s ease'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-              <MessageCircle size={16} />
-              <span>Aspak Ali</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <MessageCircle size={17} />
+              <span>WhatsApp Coordinator</span>
             </div>
             <span style={{ fontSize: '0.75rem', opacity: 0.9 }}>+91 9024772664</span>
           </button>
 
-          {/* Contact 2: Shazad Ansari */}
-          <button
-            onClick={() => handleWhatsApp(CONTACTS.shazad.cleanPhone, "Shazad")}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              background: '#128c7e',
-              color: '#ffffff',
-              border: 'none',
-              padding: '0.6rem 0.9rem',
-              borderRadius: '9999px',
-              fontWeight: 700,
-              fontSize: '0.85rem',
-              cursor: 'pointer',
-              transition: 'transform 0.15s ease'
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-              <MessageCircle size={16} />
-              <span>Shazad Ansari</span>
-            </div>
-            <span style={{ fontSize: '0.75rem', opacity: 0.9 }}>+91 9929250220</span>
-          </button>
-
-          {/* Contact 3: Direct Email */}
+          {/* Email Enquiry */}
           <button
             onClick={() => {
               setMenuOpen(false);
@@ -110,7 +85,7 @@ export default function FloatingWhatsApp() {
               background: '#f4ede1',
               color: '#163627',
               border: '1px solid #d4c7b2',
-              padding: '0.55rem 0.9rem',
+              padding: '0.6rem 0.9rem',
               borderRadius: '9999px',
               fontWeight: 700,
               fontSize: '0.82rem',
@@ -118,7 +93,7 @@ export default function FloatingWhatsApp() {
             }}
           >
             <Mail size={15} />
-            <span>Email: roamrajasthan@gmail.com</span>
+            <span>Email: {CONTACTS.email}</span>
           </button>
         </div>
       )}
@@ -127,8 +102,8 @@ export default function FloatingWhatsApp() {
       <button
         className="floating-whatsapp-trigger"
         onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Contact Aspak Ali & Shazad Ansari on WhatsApp"
-        title="Direct WhatsApp & Email Support"
+        aria-label="Contact Roam Rajasthan on WhatsApp"
+        title="Direct WhatsApp & Email Support (+91 9024772664)"
         style={{ position: 'static' }}
       >
         <MessageCircle size={22} />

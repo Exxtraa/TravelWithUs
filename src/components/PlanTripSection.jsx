@@ -38,7 +38,7 @@ export default function PlanTripSection({ onStartPlanning }) {
             <div className="plan-feature-item">
               <h4>Expert Guidance</h4>
               <p>
-                Authentic local Rajasthani hospitality managed directly by Aspak Ali & Shazad Ansari.
+                Authentic local Rajasthani hospitality managed directly by the Roam Rajasthan Team.
                 Transparent communication, honest pricing, and 24/7 on-call coordination.
               </p>
             </div>

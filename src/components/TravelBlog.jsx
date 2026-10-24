@@ -1,30 +1,9 @@
 import React from 'react';
+import { ArrowRight, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { BLOGS } from '../data/blogs';
 
 export default function TravelBlog() {
-  const blogs = [
-    {
-      title: "Hidden Gems of Rajasthan",
-      excerpt: "Step off the beaten path into the fresco-adorned havelis of Shekhawati and the peaceful red stone alleys of Bikaner.",
-      image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/The_Laxmi_Niwas_Palace%2C_Bikaner%2C_Rajasthan.jpg/1280px-The_Laxmi_Niwas_Palace%2C_Bikaner%2C_Rajasthan.jpg",
-      date: "October 2026",
-      readTime: "5 min read"
-    },
-    {
-      title: "Sustainable Desert Travel",
-      excerpt: "How mindful tourism protects fragile Thar ecosystems, promotes water harvesting traditions, and supports local Kalbeliya dancers.",
-      image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Thar_desert_Rajasthan_India.jpg/1280px-Thar_desert_Rajasthan_India.jpg",
-      date: "September 2026",
-      readTime: "6 min read"
-    },
-    {
-      title: "Royal Lake Palaces & Dinners",
-      excerpt: "Inside the timeless royal banquets, Mewar heritage cuisine, and tranquil evening boat cruises on Lake Pichola in Udaipur.",
-      image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/Udaipur_Lake_Palace.jpg/1280px-Udaipur_Lake_Palace.jpg",
-      date: "August 2026",
-      readTime: "4 min read"
-    }
-  ];
-
   return (
     <section id="travel-blog" className="blog-section">
       <div className="section-header-centered">
@@ -35,24 +14,40 @@ export default function TravelBlog() {
       </div>
 
       <div className="blog-grid">
-        {blogs.map((b, idx) => (
-          <article key={idx} className="blog-card">
+        {BLOGS.map((b) => (
+          <Link 
+            key={b.slug} 
+            to={`/blog/${b.slug}`}
+            className="blog-card blog-card-link"
+            style={{ textDecoration: 'none', color: 'inherit' }}
+            aria-label={`Read full article: ${b.title}`}
+          >
             <div className="blog-image-wrap">
               <img 
                 src={b.image} 
                 alt={b.title} 
                 className="blog-image"
                 loading="lazy"
+                onError={(e) => {
+                  e.target.src = 'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Udaipur_Lake_India.JPG/1280px-Udaipur_Lake_India.JPG';
+                }}
               />
             </div>
             <div className="blog-body">
               <h4 className="blog-title">{b.title}</h4>
               <p className="blog-excerpt">{b.excerpt}</p>
-              <div className="blog-meta">
-                <span>{b.date}</span> • <span>{b.readTime}</span>
+              <div className="blog-footer-row">
+                <div className="blog-meta">
+                  <Clock size={13} />
+                  <span>{b.date} • {b.readTime}</span>
+                </div>
+                <span className="blog-read-more">
+                  <span>Read Story</span>
+                  <ArrowRight size={14} />
+                </span>
               </div>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </section>

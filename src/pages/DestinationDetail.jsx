@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
   ArrowLeft, MessageCircle, Clock, Calendar, MapPin, 
   Star, Compass, Sparkles, Check, Info, ShieldCheck, 
-  ChevronRight, Share2, Award, Mail, Phone
+  ChevronRight, Share2, Award, Mail
 } from 'lucide-react';
 import { DESTINATIONS, CONTACTS, openWhatsAppQuote, openEmailQuote } from '../data/destinations';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
@@ -83,21 +83,11 @@ export default function DestinationDetail() {
 
           <button 
             className="btn-price-whatsapp detail-nav-whatsapp"
-            onClick={() => handleWhatsAppClick('aspak')}
-            title="Chat with Aspak Ali on WhatsApp"
+            onClick={() => handleWhatsAppClick('primary')}
+            title="Chat with Tour Coordinator on WhatsApp (+91 9024772664)"
           >
             <MessageCircle size={16} />
-            <span>WhatsApp Aspak</span>
-          </button>
-
-          <button 
-            className="btn-price-whatsapp detail-nav-whatsapp"
-            onClick={() => handleWhatsAppClick('shazad')}
-            style={{ background: '#128c7e' }}
-            title="Chat with Shazad Ansari on WhatsApp"
-          >
-            <MessageCircle size={16} />
-            <span>WhatsApp Shazad</span>
+            <span>WhatsApp (+91 9024772664)</span>
           </button>
 
           <button 
@@ -310,7 +300,7 @@ export default function DestinationDetail() {
                   <Check size={20} color="#163627" className="inclusion-icon" />
                   <div>
                     <strong>24/7 Dedicated Coordinators</strong>
-                    <span>Direct WhatsApp and call support by Aspak Ali & Shazad Ansari for any mid-trip requests.</span>
+                    <span>Direct WhatsApp and call support by the Roam Rajasthan Team for any mid-trip requests.</span>
                   </div>
                 </div>
 
@@ -333,11 +323,11 @@ export default function DestinationDetail() {
               <div className="widget-price-title">Exclusive Package Rate</div>
               <div className="widget-price-badge">Get Best Price</div>
               <p className="widget-price-note">
-                Direct booking with Aspak Ali & Shazad Ansari — No middleman commission!
+                Direct booking with Roam Rajasthan Coordinators — No middleman commission!
               </p>
             </div>
 
-            <form onSubmit={(e) => { e.preventDefault(); handleWhatsAppClick('aspak'); }} className="widget-form">
+            <form onSubmit={(e) => { e.preventDefault(); handleWhatsAppClick('primary'); }} className="widget-form">
               <div className="widget-field">
                 <label>Preferred Travel Month</label>
                 <select value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)}>
@@ -382,25 +372,16 @@ export default function DestinationDetail() {
                 </select>
               </div>
 
-              {/* CRITICAL USER REQUIREMENT: Price actions */}
+              {/* Price actions: Single WhatsApp + Email */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.6rem' }}>
                 <button 
                   type="button" 
                   className="btn-widget-whatsapp"
-                  onClick={() => handleWhatsAppClick('aspak')}
+                  onClick={() => handleWhatsAppClick('primary')}
+                  style={{ width: '100%', padding: '0.85rem' }}
                 >
                   <MessageCircle size={18} />
-                  <span>Enquire WhatsApp (Aspak Ali)</span>
-                </button>
-
-                <button 
-                  type="button" 
-                  className="btn-widget-whatsapp"
-                  onClick={() => handleWhatsAppClick('shazad')}
-                  style={{ background: '#128c7e' }}
-                >
-                  <MessageCircle size={18} />
-                  <span>Enquire WhatsApp (Shazad Ansari)</span>
+                  <span>Enquire on WhatsApp (+91 9024772664)</span>
                 </button>
 
                 <button 
@@ -434,8 +415,8 @@ export default function DestinationDetail() {
                 <span>Roam Rajasthan Direct Support</span>
               </div>
               <div style={{ fontSize: '0.82rem', color: '#58635d' }}>
-                <div>👤 <strong>Aspak Ali:</strong> {CONTACTS.aspak.phone}</div>
-                <div>👤 <strong>Shazad Ansari:</strong> {CONTACTS.shazad.phone}</div>
+                <div>📞 <strong>Coordinator Hotline:</strong> {CONTACTS.primary.phone}</div>
+                <div>📞 <strong>Support Hotline:</strong> {CONTACTS.secondary.phone}</div>
                 <div>✉️ <strong>Email:</strong> {CONTACTS.email}</div>
               </div>
             </div>

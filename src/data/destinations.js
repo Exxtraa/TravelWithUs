@@ -1,19 +1,32 @@
 // Comprehensive destinations data for Rajasthan Heritage Packages
-// Roam Rajasthan - Managed by Aspak Ali (+91 9024772664) & Shazad Ansari (+91 9929250220)
+// Roam Rajasthan - Curated by the Roam Rajasthan Team
+// 24/7 Coordinator Hotline: +91 9024772664 | Support: +91 9929250220
 // Email: roamrajasthan@gmail.com
 
 export const CONTACTS = {
-  aspak: {
-    name: "Aspak Ali",
+  primary: {
+    name: "Roam Rajasthan Coordinator",
     phone: "+91 9024772664",
     cleanPhone: "919024772664",
-    role: "Tour Director & Coordinator"
+    role: "Tour Director & Trip Coordinator"
   },
-  shazad: {
-    name: "Shazad Ansari",
+  secondary: {
+    name: "Roam Rajasthan Support",
     phone: "+91 9929250220",
     cleanPhone: "919929250220",
     role: "Senior Travel Consultant"
+  },
+  aspak: {
+    name: "Roam Rajasthan Coordinator",
+    phone: "+91 9024772664",
+    cleanPhone: "919024772664",
+    role: "Tour Coordinator"
+  },
+  shazad: {
+    name: "Roam Rajasthan Support",
+    phone: "+91 9929250220",
+    cleanPhone: "919929250220",
+    role: "Travel Consultant"
   },
   email: "roamrajasthan@gmail.com"
 };
@@ -1351,22 +1364,204 @@ export const DESTINATIONS = [
         evening: "Transfer to Jawai Bandh railway station or drive to Udaipur/Jodhpur."
       }
     ]
+  },
+
+  {
+    id: "keoladeo",
+    number: "15",
+    name: "Keoladeo",
+    subtitle: "The Bird Paradise",
+    tagline: "UNESCO World Heritage wetland sanctuary with 370+ migratory bird species, tranquil cycle rickshaw safaris, and royal wetlands",
+    badge: "The Bird Paradise",
+    duration: "2 Days / 1 Night",
+    rating: 4.94,
+    reviewsCount: 198,
+    bestSeason: "October to March (Peak migratory bird season November – February)",
+    nearestHub: "Bharatpur Junction (5 km) / Agra Airport (55 km) / Jaipur Airport (180 km)",
+    heroImage: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Keoladeo_Ghana_National_Park%2C_Bharatpur%2C_Rajasthan%2C_India.jpg/1280px-Keoladeo_Ghana_National_Park%2C_Bharatpur%2C_Rajasthan%2C_India.jpg",
+    cardImage: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Painted_stork_%28Golden_hour%29_at_Keoladeo_national_park_%28Jan%2C2023%29_01.jpg/1280px-Painted_stork_%28Golden_hour%29_at_Keoladeo_national_park_%28Jan%2C2023%29_01.jpg",
+    locationTag: "Bharatpur, Rajasthan",
+    overview: "Recognized as a UNESCO World Heritage Site, Keoladeo National Park (formerly known as Bharatpur Bird Sanctuary) is one of the world's foremost avifauna wetlands. Created over 250 years ago by Maharaja Suraj Mal of Bharatpur, this man-made wetland reserve hosts over 370 bird species each winter, including migratory flocks of painted storks, pelicans, herons, and rare raptors. Experience peaceful silence traversed only by solar rickshaws, bicycles, and melodic birdsong.",
+    highlights: [
+      "UNESCO World Heritage Wetland hosting 370+ migratory bird species",
+      "Silent cycle rickshaw safaris guided by certified local ornithologists",
+      "Lohagarh Fort (The Iron Fort) — India's only undefeated fort against British sieges",
+      "Deeg Palace water gardens with hundreds of functioning monsoon fountains",
+      "Spectacular golden sunrise & sunset photography over wetland water bodies"
+    ],
+    famousPlaces: [
+      {
+        name: "Keoladeo Ghana National Park & Wetlands",
+        category: "UNESCO World Heritage Avian Sanctuary",
+        image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Painted_stork_and_bar-headed_goose_at_Keoladeo_national_park_%28Jan%2C2023%29_16.jpg/1280px-Painted_stork_and_bar-headed_goose_at_Keoladeo_national_park_%28Jan%2C2023%29_16.jpg",
+        timings: "6:00 AM – 6:00 PM (Best at sunrise: 6:30 AM – 10:30 AM)",
+        recommendedTime: "4 – 5 Hours (Morning Rickshaw / Cycle Safari)",
+        description: "A 29-square-kilometer mosaic of dry grasslands, woodlands, swamps, and wetlands. In winter, thousands of migratory water birds from Siberia, Central Asia, and China breed here in dense nesting colonies.",
+        keyHighlights: [
+          "Nesting colonies of painted storks, spoonbills, egrets, and darters",
+          "Knowledgeable local rickshaw pullers trained as professional bird spotters",
+          "Python Point where Indian rock pythons bask in the winter sunshine"
+        ],
+        travelTip: "Hire a pair of quality binoculars at the gate and book an early morning rickshaw slot before 7:00 AM to catch birds feeding in morning mist."
+      },
+      {
+        name: "Lohagarh Fort (The Iron Fort)",
+        category: "Undefeated Medieval Sandstone Citadel",
+        image: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Lohagarh_Fort.jpg",
+        timings: "9:00 AM – 5:30 PM",
+        recommendedTime: "2 Hours",
+        description: "Constructed in 1732 by legendary Jat ruler Maharaja Suraj Mal. Surrounded by a deep moat filled with water from Moti Jheel, the fort successfully repulsed 13 ferocious sieges by the British East India Company under Lord Lake.",
+        keyHighlights: [
+          "Ashtadhatu (Eight-Metal) Gateway brought back from Delhi's Red Fort",
+          "Kishori Mahal and Mahal Khas showcasing royal Jat weaponry and statues",
+          "Jawahar Burj built to celebrate historic victory over the Mughal armies"
+        ],
+        travelTip: "Visit the Government Museum inside Kamra Palace to see antique armory, coins, and 2nd-century sculptures."
+      },
+      {
+        name: "Deeg Water Palace & Gardens",
+        category: "Royal Summer Palace with 500+ Fountains",
+        image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Deeg_Palace.jpg/1280px-Deeg_Palace.jpg",
+        timings: "9:00 AM – 5:00 PM (Closed Fridays)",
+        recommendedTime: "2 – 3 Hours (32 km from Bharatpur)",
+        description: "Built as a luxury summer retreat by Jat monarchs, Deeg features magnificent Mughal Charbagh garden layouts flanked by the Gopal Bhavan palace and twin reservoirs (Gopal Sagar and Rup Sagar), engineered with 500 gravity-fed spray fountains.",
+        keyHighlights: [
+          "Gopal Bhavan with arched pavilions reflecting into still waters",
+          "Keshav Bhavan (Monsoon Pavilion) with water channels engineered to mimic rainfall sounds",
+          "Spectacular stone jharokhas and marble pavilions looted from Mughal estates"
+        ],
+        travelTip: "Combine Deeg Palace on the morning of Day 2 for an unhurried heritage experience away from standard tourist tracks."
+      }
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Arrival, Forest Trails & Sunset Wetlands",
+        morning: "Chauffeur pickup from Bharatpur station or drive from Agra/Jaipur; check into your eco-heritage forest lodge.",
+        afternoon: "First afternoon rickshaw bird safari in Keoladeo; spot painted storks, sarus cranes, and marsh harriers.",
+        evening: "Sunset walk along Keoladeo canal banks followed by naturalist briefing and organic Rajasthani dinner."
+      },
+      {
+        day: "Day 2",
+        title: "Dawn Birding Safari, Lohagarh Fort & Departure",
+        morning: "Dawn bicycle or solar rickshaw safari to Python Point and Sapan Mori during peak morning feeding hours.",
+        afternoon: "Explore the historic impregnable Lohagarh Fort and museum in Bharatpur town.",
+        evening: "Excursion to Deeg Water Palace fountains, followed by comfortable drop-off at Bharatpur station or Jaipur."
+      }
+    ]
+  },
+
+  {
+    id: "sariska",
+    number: "16",
+    name: "Sariska",
+    subtitle: "The Tiger Gate of Rajasthan",
+    tagline: "Royal Bengal tigers, ancient Aravalli valleys, haunted Bhangarh citadel, and peaceful lake palaces",
+    badge: "The Tiger Gate of Rajasthan",
+    duration: "2 Days / 1 Night",
+    rating: 4.91,
+    reviewsCount: 215,
+    bestSeason: "October to April (Pleasant weather & high tiger sighting probability)",
+    nearestHub: "Alwar Junction (35 km) / Jaipur International Airport (105 km / 2.5 hrs drive)",
+    heroImage: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Sariska_Tiger_Reserve%2C_Alwar.jpg",
+    cardImage: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Sariska_Tiger_Reserve%2C_Rajasthan_-_Picture_1.jpg/1280px-Sariska_Tiger_Reserve%2C_Rajasthan_-_Picture_1.jpg",
+    locationTag: "Alwar, Rajasthan",
+    overview: "Spanning over 800 square kilometers in the rugged copper-rich Aravalli hills of Alwar, Sariska Tiger Reserve is honored as the Royal Tiger Gate of Rajasthan. Once the private royal hunting reserve of the Maharajas of Alwar, it made international conservation history with India's first successful wild tiger reintroduction program. Sariska boasts a dramatic blend of dry deciduous forests, rocky gorges, the ruins of 10th-century Kankwari Fort where Emperor Aurangzeb held his brother captive, the mythical Pandupol shrine, and the world-famous mysterious Bhangarh Fort.",
+    highlights: [
+      "Open 4x4 Gypsy Tiger Safaris across Sariska's core wilderness zones",
+      "10th-century Kankwari Fort set deep inside the tiger reserve forest",
+      "Siliserh Lake & Maharaja's 19th-century royal hunting lodge palace",
+      "Legendary Bhangarh Fort — India's most famous protected heritage ruins",
+      "Pandupol Hanuman Temple nestled in a dramatic rock canyon"
+    ],
+    famousPlaces: [
+      {
+        name: "Sariska Tiger Reserve Core Safari Zones",
+        category: "Royal Bengal Tiger & Leopard Habitat",
+        image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Deer_in_Sariska_-_curiously_onlooking_the_Shooter.jpg/1280px-Deer_in_Sariska_-_curiously_onlooking_the_Shooter.jpg",
+        timings: "Morning Safari: 6:00 AM – 9:30 AM | Afternoon Safari: 2:30 PM – 6:00 PM",
+        recommendedTime: "3.5 Hours Open 4x4 Gypsy Drive",
+        description: "Dense teak, dhok, and acacia forest valleys housing Royal Bengal tigers, leopards, striped hyenas, sambar deer, chital, and golden jackals along scenic forest waterholes.",
+        keyHighlights: [
+          "High tiger tracking density along Slopka, Kalighati, and Karna Ka Bas waterhole",
+          "Historic water reservoirs where wild tigers and peacocks come to drink at dawn",
+          "Certified state forest guides with deep knowledge of animal alarm calls"
+        ],
+        travelTip: "Book advance zone permits for Zone 1 or Zone 2 for prime tiger movement corridors."
+      },
+      {
+        name: "Siliserh Lake & Historic Palace",
+        category: "Royal Lake Palace & Water Reservoir",
+        image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Silisereh_Lake_Palace.jpg/1280px-Silisereh_Lake_Palace.jpg",
+        timings: "8:00 AM – 7:00 PM (Boating available till 6:00 PM)",
+        recommendedTime: "1.5 – 2 Hours",
+        description: "Built in 1845 by Maharaja Vinay Singh for his beloved queen Shila, this heritage lake palace crowns a hill slope overlooking a 10-square-kilometer serene water body framed by green Aravalli peaks.",
+        keyHighlights: [
+          "Heritage RTDC Lake Palace hotel terrace offering lakeside lunch and tea",
+          "Speedboat and pedal boat rides across calm blue waters",
+          "Frequent sightings of basking marsh crocodiles and migratory water birds"
+        ],
+        travelTip: "Enjoy a cup of spiced masala tea on the palace terrace while watching the afternoon sun gleam across the lake."
+      },
+      {
+        name: "Bhangarh Fort & Ancient Medieval Ruins",
+        category: "Historic 17th-Century Citadel & Protected Monument",
+        image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Bhangarh_Fort_of_Rajasthan.jpg/1280px-Bhangarh_Fort_of_Rajasthan.jpg",
+        timings: "6:00 AM – 6:00 PM (Strictly closed after sunset by ASI)",
+        recommendedTime: "2 – 3 Hours",
+        description: "Built in 1573 by Raja Bhagwant Das for his younger son Madho Singh, Bhangarh is a magnificent sprawling medieval complex featuring royal bazaars, havelis, Gopinath Temple, and the royal palace ruins set dramatically against the hillside.",
+        keyHighlights: [
+          "Gopinath Temple with exquisite carved sandstone nagara-style architecture",
+          "Five grand entry gates: Lahori Gate, Ajmeri Gate, Phulbari Gate, Delhi Gate",
+          "Intriguing royal legends and unmatched architectural preservation"
+        ],
+        travelTip: "Visit during bright daylight hours (11:00 AM – 3:00 PM) to admire the extraordinary stone carvings and preserved street market layouts."
+      },
+      {
+        name: "Kankwari Fort & Pandupol",
+        category: "Historic Mughal Prison Citadel & Sacred Canyon",
+        image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Kankwari_Fort_%28Sariska_Tiger_Reserve%29.jpg/1280px-Kankwari_Fort_%28Sariska_Tiger_Reserve%29.jpg",
+        timings: "Accessible during forest safari hours",
+        recommendedTime: "1.5 Hours",
+        description: "Perched atop an isolated hill within the reserve, Kankwari Fort was built by Maharaja Jai Singh II and served as the prison where Aurangzeb kept his elder brother Dara Shikoh. Nearby Pandupol features a dramatic natural rock cleft where the Pandava Bhima struck the mountain with his mace.",
+        keyHighlights: [
+          "Panoramic aerial views of Sariska forest from the high Kankwari bastion",
+          "Ancient Hanuman shrine visited by hundreds of wild langur monkeys",
+          "Seasonal waterfalls and perennial mountain spring streams"
+        ],
+        travelTip: "Access to Kankwari requires a 4x4 Gypsy; wear dust masks or scarves during the safari."
+      }
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Siliserh Lake, Kankwari & Evening Tiger Safari",
+        morning: "Scenic drive from Jaipur or Delhi; scenic stop at Siliserh Lake Palace for lakeside refreshment; check in to your luxury Sariska jungle resort.",
+        afternoon: "First 4x4 open Gypsy tiger safari deep into Sariska core zones; track big cats and wildlife around Kalighati waterholes.",
+        evening: "Bonfire evening under star-filled skies with local Rajasthani folk musicians and delicious dinner."
+      },
+      {
+        day: "Day 2",
+        title: "Dawn Tiger Safari, Bhangarh Fort & Departure",
+        morning: "Crisp early morning safari for dawn tiger activity, followed by hearty breakfast at your resort.",
+        afternoon: "Scenic drive through the Aravalli pass to explore the monumental ruins of Bhangarh Fort and Gopinath temple.",
+        evening: "Comfortable private transfer to Jaipur Airport or Alwar railway station."
+      }
+    ]
   }
 ];
 
-// Helper to open WhatsApp with custom inquiry message matching the user's exact specification:
-// Target numbers:
-// 1. Aspak Ali: +91 9024772664
-// 2. Shazad Ansari: +91 9929250220
-export const openWhatsAppQuote = (destinationName, customDetails = {}, recipient = 'aspak') => {
-  const phone = recipient === 'shazad' ? CONTACTS.shazad.cleanPhone : CONTACTS.aspak.cleanPhone;
-  const personName = recipient === 'shazad' ? "Shazad" : "Aspak";
+// Helper to open WhatsApp with custom inquiry message matching default number: +91 9024772664
+export const openWhatsAppQuote = (destinationName, customDetails = {}, recipient = 'primary') => {
+  // Defaults to +91 9024772664
+  const phone = recipient === 'secondary' ? CONTACTS.secondary.cleanPhone : CONTACTS.primary.cleanPhone;
 
-  // Exact template requested by user:
-  let message = `Hi ${personName}, I recently seen the ${destinationName} package and aim rellay intererest it can you please send me the furrrture detail`;
+  let message = `Hi Roam Rajasthan Team, I recently viewed the ${destinationName} package and I am really interested in planning this tour. Can you please share the itinerary details and best pricing options?`;
 
-  if (customDetails.travelers || customDetails.month || customDetails.hotelTier || customDetails.vehicle) {
+  if (customDetails.startDate || customDetails.endDate || customDetails.travelers || customDetails.month || customDetails.hotelTier || customDetails.vehicle) {
     message += `\n\n--- My Travel Preferences ---`;
+    if (customDetails.startDate) message += `\n• Start Date: ${customDetails.startDate}`;
+    if (customDetails.endDate) message += `\n• End Date: ${customDetails.endDate}`;
     if (customDetails.travelers) message += `\n• Travelers: ${customDetails.travelers}`;
     if (customDetails.month) message += `\n• Travel Month: ${customDetails.month}`;
     if (customDetails.hotelTier) message += `\n• Hotel Preference: ${customDetails.hotelTier}`;
@@ -1378,15 +1573,17 @@ export const openWhatsAppQuote = (destinationName, customDetails = {}, recipient
   window.open(url, "_blank");
 };
 
-// Helper to open Email / Gmail with auto-filled message just like WhatsApp:
+// Helper to open Email / Gmail with auto-filled message
 // Email: roamrajasthan@gmail.com
 export const openEmailQuote = (destinationName, customDetails = {}) => {
-  const subject = `Tour Enquiry for ${destinationName} Package - Roam Rajasthan`;
+  const subject = `Tour Enquiry for ${destinationName} Package — Roam Rajasthan`;
   
-  let body = `Hi Aspak Ali & Shazad Ansari,\n\nI recently seen the ${destinationName} package on Roam Rajasthan and aim rellay intererest it can you please send me the furrrture detail and best pricing options?\n`;
+  let body = `Hi Roam Rajasthan Team,\n\nI recently viewed the ${destinationName} package on Roam Rajasthan and I am really interested in planning this tour. Could you please send me further details and pricing options?\n`;
 
-  if (customDetails.travelers || customDetails.month || customDetails.hotelTier || customDetails.vehicle) {
+  if (customDetails.startDate || customDetails.endDate || customDetails.travelers || customDetails.month || customDetails.hotelTier || customDetails.vehicle) {
     body += `\n--- My Travel Preferences ---`;
+    if (customDetails.startDate) body += `\n• Start Date: ${customDetails.startDate}`;
+    if (customDetails.endDate) body += `\n• End Date: ${customDetails.endDate}`;
     if (customDetails.travelers) body += `\n• Travelers: ${customDetails.travelers}`;
     if (customDetails.month) body += `\n• Planned Month: ${customDetails.month}`;
     if (customDetails.hotelTier) body += `\n• Hotel Preference: ${customDetails.hotelTier}`;
@@ -1396,7 +1593,5 @@ export const openEmailQuote = (destinationName, customDetails = {}) => {
   body += `\nLooking forward to your prompt response!\n\nThank you,\nTraveler`;
 
   const mailtoUrl = `mailto:${CONTACTS.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  
-  // Also provide web Gmail fallback link
   window.location.href = mailtoUrl;
 };

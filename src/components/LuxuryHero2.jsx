@@ -29,7 +29,7 @@ export default function LuxuryHero2({ onFilterChange }) {
     >
       <div className="luxury-hero-content">
         <h2 className="luxury-hero-title">
-          Experience The World<br />Like Never Before
+          Experience The Heritage<br />Like Never Before
         </h2>
         <p className="luxury-hero-subtitle">
           Discover curated royal escapes, golden desert dunes, and unforgettable 
@@ -37,18 +37,24 @@ export default function LuxuryHero2({ onFilterChange }) {
         </p>
       </div>
 
-      {/* Floating Plan Form with proper placeholders, destination, start date, end date, and direct WhatsApp redirect to +91 9024772664 */}
-      <form onSubmit={handlePlanSubmit} className="floating-search-bar floating-plan-bar">
-        <div className="search-field-item">
-          <label>Destination</label>
-          <select 
-            value={selectedDestination} 
+      <form
+        onSubmit={handlePlanSubmit}
+        className="experience-filter-glass"
+        aria-label="Rajasthan trip planner"
+      >
+        <div className="experience-filter-item">
+          <label className="experience-filter-label" htmlFor="hero-destination">
+            Location
+          </label>
+          <select
+            id="hero-destination"
+            value={selectedDestination}
             onChange={(e) => {
               setSelectedDestination(e.target.value);
               if (onFilterChange && e.target.value) onFilterChange(e.target.value);
             }}
             required
-            aria-label="Select Destination"
+            aria-label="Select destination"
           >
             <option value="" disabled>Select Destination</option>
             <option value="all">All Rajasthan Heritage Packages</option>
@@ -59,31 +65,30 @@ export default function LuxuryHero2({ onFilterChange }) {
             ))}
           </select>
         </div>
-
-        <div className="search-field-item">
-          <label>Start Date</label>
-          <input 
-            type="date" 
+        <div className="experience-filter-item">
+          <span className="experience-filter-label">Start Date</span>
+          <input
+            type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            placeholder="Select Start Date"
-            aria-label="Trip Start Date"
+            aria-label="Trip start date"
           />
         </div>
-
-        <div className="search-field-item">
-          <label>End Date</label>
-          <input 
-            type="date" 
+        <div className="experience-filter-item">
+          <span className="experience-filter-label">End Date</span>
+          <input
+            type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            placeholder="Select End Date"
-            aria-label="Trip End Date"
+            aria-label="Trip end date"
           />
         </div>
-
-        <button type="submit" className="btn-search-green btn-plan-direct" aria-label="Plan on WhatsApp">
-          <span>Plan</span>
+        <button
+          type="submit"
+          className="experience-filter-cta"
+          aria-label="Plan trip on WhatsApp"
+        >
+          <span>Explore</span>
           <ArrowRight size={17} />
         </button>
       </form>

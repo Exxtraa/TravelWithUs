@@ -1,13 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
   ArrowLeft, MessageCircle, Clock, Calendar, MapPin, 
-  Star, Compass, Sparkles, Check, Info, ShieldCheck, 
-  ChevronRight, Share2, Award, Mail
+  Star, Sparkles, Check, Info, ShieldCheck,
+  ChevronRight, Share2, Award, Mail, X, BookOpen
 } from 'lucide-react';
 import { DESTINATIONS, CONTACTS, openWhatsAppQuote, openEmailQuote } from '../data/destinations';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import NewsletterFooter from '../components/NewsletterFooter';
+
+const destinationThemes = {
+  jaipur: { accent: '#922b52', tint: '#fff3f6' },
+  jaisalmer: { accent: '#8a5a1d', tint: '#fff8ec' },
+  jodhpur: { accent: '#285d91', tint: '#f1f7fd' },
+  udaipur: { accent: '#286e68', tint: '#eff8f6' },
+  bikaner: { accent: '#9a542d', tint: '#fcf3ed' },
+  ajmer: { accent: '#536d76', tint: '#f1f6f7' },
+  ranthambore: { accent: '#3e7048', tint: '#f1f7ef' },
+  chittorgarh: { accent: '#874842', tint: '#fbf2f0' },
+  bundi: { accent: '#496d91', tint: '#f2f6fb' },
+  pushkar: { accent: '#79518c', tint: '#f8f2fa' },
+  kumbhalgarh: { accent: '#65734b', tint: '#f4f6ef' },
+  mountabu: { accent: '#477970', tint: '#f0f8f6' },
+  kota: { accent: '#347888', tint: '#eff7f8' },
+  jawai: { accent: '#70694f', tint: '#f7f5ef' },
+  keoladeo: { accent: '#347b78', tint: '#eff8f7' },
+  sariska: { accent: '#567342', tint: '#f3f7ef' }
+};
 
 export default function DestinationDetail() {
   const { id } = useParams();
@@ -15,6 +34,10 @@ export default function DestinationDetail() {
 
   // Find destination
   const destination = DESTINATIONS.find(d => d.id === id) || DESTINATIONS[0];
+  const destinationTheme = destinationThemes[destination.id] || {
+    accent: '#315f4b',
+    tint: '#f2f6f2'
+  };
 
   // Trip planner widget state
   const [selectedMonth, setSelectedMonth] = useState('Upcoming Month');
@@ -22,11 +45,59 @@ export default function DestinationDetail() {
   const [hotelTier, setHotelTier] = useState('Heritage Haveli');
   const [vehicle, setVehicle] = useState('Private AC Sedan');
   const [copied, setCopied] = useState(false);
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+  const historyPopoverRef = useRef(null);
+  const placesTimelineRef = useRef(null);
+  const [timelineProgress, setTimelineProgress] = useState(0);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     document.title = `${destination.name} Tour Package — Roam Rajasthan`;
   }, [id, destination.name]);
+
+  useEffect(() => {
+    if (!isHistoryOpen) return undefined;
+
+    const closeOnOutsideClick = (event) => {
+      if (!historyPopoverRef.current?.contains(event.target)) {
+        setIsHistoryOpen(false);
+      }
+    };
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setIsHistoryOpen(false);
+    };
+
+    document.addEventListener('pointerdown', closeOnOutsideClick);
+    document.addEventListener('keydown', closeOnEscape);
+    return () => {
+      document.removeEventListener('pointerdown', closeOnOutsideClick);
+      document.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [isHistoryOpen]);
+
+  useEffect(() => {
+    const updateTimelineProgress = () => {
+      const timeline = placesTimelineRef.current;
+      if (!timeline) return;
+
+      const { top, height } = timeline.getBoundingClientRect();
+      const progress = height > 0
+        ? Math.min(1, Math.max(0, (window.innerHeight * 0.72 - top) / height)) * 100
+        : 0;
+      setTimelineProgress((current) => (
+        Math.abs(current - progress) >= 1 ? progress : current
+      ));
+    };
+
+    updateTimelineProgress();
+    window.addEventListener('scroll', updateTimelineProgress, { passive: true });
+    window.addEventListener('resize', updateTimelineProgress);
+
+    return () => {
+      window.removeEventListener('scroll', updateTimelineProgress);
+      window.removeEventListener('resize', updateTimelineProgress);
+    };
+  }, [id]);
 
   const handleWhatsAppClick = (recipient = 'aspak') => {
     openWhatsAppQuote(destination.name, {
@@ -61,9 +132,20 @@ export default function DestinationDetail() {
 
   // Other destinations to recommend
   const otherDestinations = DESTINATIONS.filter(d => d.id !== destination.id);
+  const heroPhotos = destination.famousPlaces
+    .filter((place) => place.image)
+    .map((place) => place.image);
+  const photoCount = Math.max(heroPhotos.length, 1);
+  const slideshowDuration = `${photoCount * 15}s`;
 
   return (
-    <div className="detail-page-container">
+    <div
+      className="detail-page-container"
+      style={{
+        '--destination-accent': destinationTheme.accent,
+        '--destination-tint': destinationTheme.tint
+      }}
+    >
       {/* Top Sticky Navigation */}
       <nav className="detail-top-nav">
         <button className="btn-back-home" onClick={() => navigate('/')}>
@@ -105,8 +187,26 @@ export default function DestinationDetail() {
       {/* Hero Banner with Heritage Photo */}
       <section 
         className="detail-hero-banner"
-        style={{ backgroundImage: `url('${destination.heroImage}')` }}
+        style={{ '--destination-slideshow-duration': slideshowDuration }}
       >
+        <div className="detail-hero-photo-track" aria-hidden="true">
+          {[0, 1].map((groupIndex) => (
+            <div className="detail-hero-photo-group" key={groupIndex}>
+              {heroPhotos.length > 0 ? heroPhotos.map((photo, index) => (
+                <div
+                  key={`${photo}-${index}`}
+                  className="detail-hero-photo-slide"
+                  style={{ backgroundImage: `url('${photo}')` }}
+                />
+              )) : (
+                <div
+                  className="detail-hero-photo-slide"
+                  style={{ backgroundImage: `url('${destination.heroImage}')` }}
+                />
+              )}
+            </div>
+          ))}
+        </div>
         <div className="detail-hero-content">
           <div className="detail-badge-pill">
             <Sparkles size={14} />
@@ -114,8 +214,6 @@ export default function DestinationDetail() {
           </div>
 
           <h1 className="detail-title">{destination.name} Tour Package</h1>
-          <p className="detail-tagline">{destination.subtitle} — {destination.tagline}</p>
-
           <div className="detail-facts-row">
             <div className="fact-item">
               <Clock size={15} color="#c69214" />
@@ -142,19 +240,50 @@ export default function DestinationDetail() {
         {/* Left Column: Places to Visit, Itinerary, Inclusions */}
         <div className="detail-content-col">
           {/* 1. Overview */}
-          <section>
-            <h2 className="section-block-title">
-              <Compass size={24} color="#163627" />
-              <span>Royal History & City Overview</span>
-            </h2>
-            <div className="detail-overview-text">
-              <p>{destination.overview}</p>
+          <section className="destination-history-section">
+            <div
+              className={`destination-history-control${isHistoryOpen ? ' is-open' : ''}`}
+              ref={historyPopoverRef}
+              onMouseEnter={() => setIsHistoryOpen(true)}
+              onMouseLeave={() => setIsHistoryOpen(false)}
+            >
+              <button
+                type="button"
+                className="know-history-button"
+                aria-expanded={isHistoryOpen}
+                aria-controls="destination-history-popover"
+                onClick={() => setIsHistoryOpen(true)}
+              >
+                <BookOpen size={16} />
+                <span>Know History</span>
+              </button>
+              {isHistoryOpen && (
+                <div
+                  className="destination-history-popover"
+                  id="destination-history-popover"
+                  role="dialog"
+                  aria-label="Royal History & City Overview"
+                >
+                  <div className="destination-history-popover-header">
+                    <h2>Royal History &amp; City Overview</h2>
+                    <button
+                      type="button"
+                      className="destination-history-close"
+                      aria-label="Close history"
+                      onClick={() => setIsHistoryOpen(false)}
+                    >
+                      <X size={17} />
+                    </button>
+                  </div>
+                  <p>{destination.overview}</p>
+                </div>
+              )}
             </div>
           </section>
 
           {/* 2. Famous Places to Visit (Detailed Cards) */}
           <section>
-            <div style={{ marginBottom: '1.5rem' }}>
+            <div className="places-section-heading">
               <h2 className="section-block-title">
                 <MapPin size={24} color="#163627" />
                 <span>Famous Tourist Places to Visit in {destination.name}</span>
@@ -164,24 +293,18 @@ export default function DestinationDetail() {
               </p>
             </div>
 
-            <div className="famous-places-list">
+            <div
+              className="places-journey-card"
+              ref={placesTimelineRef}
+              style={{ '--journey-progress': `${timelineProgress}%` }}
+            >
+              <div className="places-journey-list">
               {destination.famousPlaces.map((place, idx) => (
-                <div key={idx} className="place-card-detailed">
-                  <div className="place-card-img-wrap">
-                    <span className="place-card-category">{place.category}</span>
-                    <img 
-                      src={place.image} 
-                      alt={place.name} 
-                      className="place-card-img"
-                      loading="lazy"
-                      onError={(e) => {
-                        e.target.src = destination.heroImage;
-                      }}
-                    />
-                  </div>
-
-                  <div className="place-card-content">
+                <article key={idx} className="place-journey-entry">
+                  <span className="place-journey-dot" aria-hidden="true" />
+                  <div className="place-journey-content">
                     <div>
+                      <span className="place-journey-category">{place.category}</span>
                       <h3 className="place-name">{place.name}</h3>
 
                       <div className="place-quick-badges">
@@ -216,8 +339,9 @@ export default function DestinationDetail() {
                       </div>
                     )}
                   </div>
-                </div>
+                </article>
               ))}
+              </div>
             </div>
           </section>
 
@@ -275,7 +399,7 @@ export default function DestinationDetail() {
           <section>
             <h2 className="section-block-title">
               <ShieldCheck size={24} color="#163627" />
-              <span>What's Included in This Package</span>
+              <span>Thing's can Included on Demand</span>
             </h2>
 
             <div className="inclusions-card">
@@ -363,22 +487,13 @@ export default function DestinationDetail() {
                 </select>
               </div>
 
-              <div className="widget-field">
-                <label>Vehicle Choice</label>
-                <select value={vehicle} onChange={(e) => setVehicle(e.target.value)}>
-                  <option value="Private AC Sedan (Dzire / Etios)">Private AC Sedan (1-3 Pax)</option>
-                  <option value="Toyota Innova / Crysta SUV">Toyota Innova SUV (4-6 Pax)</option>
-                  <option value="Luxury Tempo Traveller">Luxury Tempo Traveller (7+ Pax)</option>
-                </select>
-              </div>
-
               {/* Price actions: Single WhatsApp + Email */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.6rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: '0.35rem' }}>
                 <button 
                   type="button" 
                   className="btn-widget-whatsapp"
                   onClick={() => handleWhatsAppClick('primary')}
-                  style={{ width: '100%', padding: '0.85rem' }}
+                  style={{ width: '100%', padding: '0.55rem' }}
                 >
                   <MessageCircle size={18} />
                   <span>Enquire on WhatsApp (+91 9024772664)</span>
@@ -395,10 +510,10 @@ export default function DestinationDetail() {
                     background: '#f4ede1',
                     border: '1.5px solid #d4c7b2',
                     color: '#163627',
-                    padding: '0.75rem',
+                    padding: '0.55rem',
                     borderRadius: '9999px',
                     fontWeight: 700,
-                    fontSize: '0.9rem',
+                    fontSize: '0.78rem',
                     cursor: 'pointer',
                     width: '100%'
                   }}
@@ -414,7 +529,7 @@ export default function DestinationDetail() {
                 <Award size={18} />
                 <span>Roam Rajasthan Direct Support</span>
               </div>
-              <div style={{ fontSize: '0.82rem', color: '#58635d' }}>
+              <div style={{ fontSize: '0.72rem', lineHeight: 1.35, color: '#58635d' }}>
                 <div>📞 <strong>Coordinator Hotline:</strong> {CONTACTS.primary.phone}</div>
                 <div>📞 <strong>Support Hotline:</strong> {CONTACTS.secondary.phone}</div>
                 <div>✉️ <strong>Email:</strong> {CONTACTS.email}</div>

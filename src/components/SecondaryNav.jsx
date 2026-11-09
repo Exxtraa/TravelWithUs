@@ -237,8 +237,8 @@ export default function SecondaryNav({ onOpenPlanModal }) {
               </div>
 
               <div style={{ marginTop: '0.8rem', textAlign: 'center', fontSize: '0.8rem', color: '#58635d' }}>
-                <div>24/7 Coordinator Hotline: {CONTACTS.primary.phone}</div>
-                <div>Support Hotline: {CONTACTS.secondary.phone}</div>
+                <div>24/7 Coordinator: {CONTACTS.primary.phone}</div>
+                <div>Support: {CONTACTS.secondary.phone}</div>
               </div>
             </div>
           </div>

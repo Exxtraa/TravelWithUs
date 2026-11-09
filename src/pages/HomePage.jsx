@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import HeaderHero1 from '../components/HeaderHero1';
 import SecondaryNav from '../components/SecondaryNav';
 import LuxuryHero2 from '../components/LuxuryHero2';
 import PopularDestinations from '../components/PopularDestinations';
@@ -15,37 +14,20 @@ export default function HomePage() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [isPlanModalOpen, setIsPlanModalOpen] = useState(false);
 
-  const scrollToSecondary = () => {
-    const el = document.getElementById('secondary-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const handleFilterChange = (destId) => {
     setActiveFilter(destId);
   };
 
   return (
     <div className="home-page-container">
-      {/* 1. Landing Hero Screen matching Image 1 layout with Indian Heritage backdrop */}
-      <HeaderHero1 
-        onExploreClick={scrollToSecondary}
-        onSearchChange={handleFilterChange}
-      />
-
-      {/* 2. Secondary Section matching Image 2 layout */}
+      {/* Main website experience */}
       <div id="secondary-section">
-        {/* Sticky Secondary Navigation matching Image 2 */}
         <SecondaryNav 
           onOpenPlanModal={() => setIsPlanModalOpen(true)}
-          onSearchClick={scrollToSecondary}
         />
 
-        {/* Luxury Hero Banner & Floating Search Bar matching Image 2 */}
         <LuxuryHero2 
           onFilterChange={handleFilterChange}
-          onOpenPlanModal={() => setIsPlanModalOpen(true)}
         />
 
         {/* Popular Destinations matching Image 2 (Jaipur, Jaisalmer, Jodhpur, Udaipur, Bikaner, Ajmer) */}

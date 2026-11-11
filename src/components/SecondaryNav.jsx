@@ -213,6 +213,14 @@ export default function SecondaryNav({ onOpenPlanModal }) {
                   <MessageCircle size={18} />
                   <span>WhatsApp Coordinator (+91 9024772664)</span>
                 </button>
+                <button
+                  className="btn-price-whatsapp"
+                  onClick={() => handleWhatsAppDirect(CONTACTS.secondary.cleanPhone)}
+                  style={{ width: '100%' }}
+                >
+                  <MessageCircle size={18} />
+                  <span>WhatsApp Support (+91 9929250220)</span>
+                </button>
                 <button 
                   className="btn-email-action"
                   onClick={() => { setMobileMenuOpen(false); openEmailQuote('Rajasthan Heritage Circuit'); }}

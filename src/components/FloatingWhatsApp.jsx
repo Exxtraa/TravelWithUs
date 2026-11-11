@@ -12,7 +12,7 @@ export default function FloatingWhatsApp() {
 
   return (
     <div className="floating-contact-widget" style={{ position: 'fixed', bottom: '1.8rem', right: '1.8rem', zIndex: 1000 }}>
-      {/* Expanded Quick Contact Popover - only showing ONE number (+91 9024772664) and email */}
+      {/* Expanded Quick Contact Popover */}
       {menuOpen && (
         <div 
           style={{
@@ -43,10 +43,9 @@ export default function FloatingWhatsApp() {
           </div>
 
           <p style={{ fontSize: '0.78rem', color: '#666', lineHeight: 1.4 }}>
-            Direct local pricing without middlemen. Connect directly with our 24/7 tour coordinator:
+            Direct local pricing without middlemen. Contact either of our Rajasthan travel coordinators:
           </p>
 
-          {/* Single Contact: Tour Coordinator +91 9024772664 */}
           <button
             onClick={() => handleWhatsApp(CONTACTS.primary.cleanPhone)}
             style={{
@@ -66,9 +65,33 @@ export default function FloatingWhatsApp() {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <MessageCircle size={17} />
-              <span>WhatsApp Coordinator</span>
+              <span>WhatsApp 1</span>
             </div>
             <span style={{ fontSize: '0.75rem', opacity: 0.9 }}>+91 9024772664</span>
+          </button>
+
+          <button
+            onClick={() => handleWhatsApp(CONTACTS.secondary.cleanPhone)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              background: '#20bd5a',
+              color: '#ffffff',
+              border: 'none',
+              padding: '0.65rem 0.95rem',
+              borderRadius: '9999px',
+              fontWeight: 700,
+              fontSize: '0.86rem',
+              cursor: 'pointer',
+              transition: 'transform 0.15s ease'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <MessageCircle size={17} />
+              <span>WhatsApp 2</span>
+            </div>
+            <span style={{ fontSize: '0.75rem', opacity: 0.9 }}>+91 9929250220</span>
           </button>
 
           {/* Email Enquiry */}
@@ -103,7 +126,7 @@ export default function FloatingWhatsApp() {
         className="floating-whatsapp-trigger"
         onClick={() => setMenuOpen(!menuOpen)}
         aria-label="Contact Roam Rajasthan on WhatsApp"
-        title="Direct WhatsApp & Email Support (+91 9024772664)"
+        title={`Direct WhatsApp & Email Support (${CONTACTS.primary.phone} / ${CONTACTS.secondary.phone})`}
         style={{ position: 'static' }}
       >
         <MessageCircle size={22} />

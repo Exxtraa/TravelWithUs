@@ -11,14 +11,14 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
 
   if (!isOpen) return null;
 
-  const handleWhatsAppSubmit = () => {
+  const handleWhatsAppSubmit = (recipient = 'primary') => {
     const destObj = DESTINATIONS.find(d => d.id === destination) || { name: 'Rajasthan Heritage Circuit' };
     openWhatsAppQuote(destObj.name, {
       travelers,
       month,
       hotelTier,
       vehicle
-    }, 'primary');
+    }, recipient);
     onClose();
   };
 
@@ -49,7 +49,7 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
             Customize Your Tour Package
           </h3>
           <p className="modal-subtitle">
-            Tell us your travel preferences. We generate an instant inquiry directly to the <strong>Roam Rajasthan Team</strong> (+91 9024772664) with zero broker margins.
+            Tell us your travel preferences. We generate an instant inquiry directly to the <strong>Roam Rajasthan Team</strong> with zero broker margins.
           </p>
         </div>
 
@@ -113,7 +113,7 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
             </div>
           </div>
 
-          {/* Action Buttons: WhatsApp to +91 9024772664 & Email */}
+          {/* Action buttons: both WhatsApp coordinators and email */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.6rem' }}>
             <button
               type="button"
@@ -123,6 +123,16 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
             >
               <MessageCircle size={18} />
               <span>Send via WhatsApp (+91 9024772664)</span>
+            </button>
+
+            <button
+              type="button"
+              className="btn-widget-whatsapp"
+              onClick={() => handleWhatsAppSubmit('secondary')}
+              style={{ padding: '0.85rem 0.9rem', fontSize: '0.92rem', width: '100%' }}
+            >
+              <MessageCircle size={18} />
+              <span>Send via WhatsApp (+91 9929250220)</span>
             </button>
 
             <button
@@ -149,7 +159,7 @@ export default function CustomPlanModal({ isOpen, onClose, initialDestination = 
           </div>
 
           <p className="modal-disclaimer">
-            Redirects directly to WhatsApp (+91 9024772664) or your Email app with your pre-filled inquiry. No spam, immediate personal response.
+            Choose either WhatsApp number or email for your pre-filled inquiry. No spam, immediate personal response.
           </p>
         </form>
       </div>

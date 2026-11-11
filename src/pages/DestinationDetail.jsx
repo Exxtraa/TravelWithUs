@@ -169,8 +169,10 @@ export default function DestinationDetail() {
             title="Chat with Tour Coordinator on WhatsApp (+91 9024772664)"
           >
             <MessageCircle size={16} />
-            <span>WhatsApp (+91 9024772664)</span>
+            <span>WhatsApp</span>
           </button>
+
+          
 
           <button 
             onClick={handleEmailClick}
@@ -193,15 +195,34 @@ export default function DestinationDetail() {
           {[0, 1].map((groupIndex) => (
             <div className="detail-hero-photo-group" key={groupIndex}>
               {heroPhotos.length > 0 ? heroPhotos.map((photo, index) => (
-                <div
+                <img
                   key={`${photo}-${index}`}
                   className="detail-hero-photo-slide"
-                  style={{ backgroundImage: `url('${photo}')` }}
+                  src={photo}
+                  alt=""
+                  draggable="false"
+                  loading="eager"
+                  decoding="async"
+                  onError={(event) => {
+                    const image = event.currentTarget;
+                    if (image.dataset.fallbackAttempted) {
+                      image.style.display = 'none';
+                      return;
+                    }
+                    image.dataset.fallbackAttempted = 'true';
+                    image.src = photo === destination.heroImage
+                      ? destination.cardImage
+                      : destination.heroImage;
+                  }}
                 />
               )) : (
-                <div
+                <img
                   className="detail-hero-photo-slide"
-                  style={{ backgroundImage: `url('${destination.heroImage}')` }}
+                  src={destination.heroImage}
+                  alt=""
+                  draggable="false"
+                  loading="eager"
+                  decoding="async"
                 />
               )}
             </div>
@@ -497,6 +518,16 @@ export default function DestinationDetail() {
                 >
                   <MessageCircle size={18} />
                   <span>Enquire on WhatsApp (+91 9024772664)</span>
+                </button>
+
+                <button
+                  type="button"
+                  className="btn-widget-whatsapp"
+                  onClick={() => handleWhatsAppClick('secondary')}
+                  style={{ width: '100%', padding: '0.55rem' }}
+                >
+                  <MessageCircle size={18} />
+                  <span>Enquire on WhatsApp (+91 9929250220)</span>
                 </button>
 
                 <button 
